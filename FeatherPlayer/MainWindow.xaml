@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FeatherPlayer"
         mc:Ignorable="d"
-        Title="FeatherPlayer" Height="560" Width="800"
+        Title="FeatherPlayer" Height="576" Width="900"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
         AllowsTransparency="True" WindowStyle="None"
         Background="#7A0097FF" Loaded="wndMain_Loaded" MouseLeftButtonDown="wndMain_MouseLeftButtonDown" BorderThickness="1"
@@ -28,6 +28,6 @@
 
             </Grid>
         </Grid>
-        <TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top"><Run Text="Hello! "/><LineBreak/><Run Text="Welcome to use Feather Player"/><Run FontStyle="Italic" Text="!"/></TextBlock>
+        <TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top" d:IsHidden="True"><Run Text="Hello! "/><LineBreak/><Run Text="Welcome to use Feather Player"/><Run FontStyle="Italic" Text="!"/></TextBlock>
     </Grid>
 </Window>
