@@ -1,0 +1,24 @@
+﻿<ResourceDictionary x:Class="Icons" x:Name="IconCollections" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FeatherPlayer">
+    <Viewbox x:Key="icoPlay" Width="48" Height="48">
+        <Canvas  Width="24" Height="24">
+            <Path Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="Black" />
+        </Canvas>
+    </Viewbox>
+    <Viewbox x:Key="icoPause" Width="48" Height="48">
+        <Canvas Width="24" Height="24">
+            <Path Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="Black" />
+        </Canvas>
+    </Viewbox>
+    <Viewbox x:Key="icoNext" Width="48" Height="48">
+        <Canvas Width="24" Height="24">
+            <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8L13,12L8,16M14,8H16V16H14" Fill="Black" />
+        </Canvas>
+    </Viewbox>
+    <Viewbox x:Key="icoBack" Width="48" Height="48">
+        <Canvas Width="24" Height="24">
+            <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8H10V16H8M16,8V16L11,12" Fill="Black" />
+        </Canvas>
+    </Viewbox>
+</ResourceDictionary>
