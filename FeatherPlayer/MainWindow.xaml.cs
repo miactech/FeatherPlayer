@@ -44,9 +44,10 @@ namespace FeatherPlayer
         Geometry pausedata,nextdata;//initialize the icons
         private void wndMain_Loaded(object sender, RoutedEventArgs e)
         {
+
             Blur.EnableBlur(this);
             AudioInfo.wav.WavInfo wi = AudioInfo.wav.GetWavInfo("test.wav");
-            MessageBox.Show("Test");
+            //MessageBox.Show("Test");
         }
 
         private void wndMain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
