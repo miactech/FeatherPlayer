@@ -46,7 +46,7 @@ namespace FeatherPlayer
         {
 
             Blur.EnableBlur(this);
-            AudioInfo.wav.WavInfo wi = AudioInfo.wav.GetWavInfo("test.wav");
+            //AudioInfo.wav.WavInfo wi = AudioInfo.wav.GetWavInfo("test.wav");
             //MessageBox.Show("Test");
         }
 
@@ -84,6 +84,7 @@ namespace FeatherPlayer
 
         private void next_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             switch (playstatus)
             {
                 case playStatus.Unloaded:
