@@ -5,27 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FeatherPlayer"
         mc:Ignorable="d"
-        Title="FeatherPlayer" Height="576" Width="900"
+        Title="FeatherPlayer" Height="576" Width="931"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
         AllowsTransparency="True" WindowStyle="None"
         Background="#7A0097FF" Loaded="wndMain_Loaded" MouseLeftButtonDown="wndMain_MouseLeftButtonDown" BorderThickness="1" HorizontalAlignment="Center"
         >
     <Grid>
-        <Rectangle x:Name="gridMain" Margin="2,45,0,54"  Opacity="0.3" Fill="#7A0097FF"/>
+        <Rectangle x:Name="gridMain" Margin="2,40,0,50"  Opacity="0.3" Fill="#7A0097FF"/>
         <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="1,0,1,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="869*"/>
-                <ColumnDefinition Width="27*"/>
-            </Grid.ColumnDefinitions>
-            <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown" Grid.ColumnSpan="2">
+            <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown">
                 <Grid x:Name="btnExitBackground" Background="Red" Opacity="0"/>
                 <Canvas x:Name="CExit" Width="24" Height="24">
                     <Path Fill="White" Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
                 </Canvas>
+
             </Grid>
         </Grid>
         <TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top" d:IsHidden="True"><Run Text="Hello! "/><LineBreak/><Run Text="Welcome to use Feather Player"/><Run FontStyle="Italic" Text="!"/></TextBlock>
-        <Grid HorizontalAlignment="Left" Height="54" Margin="0,520,0,0" VerticalAlignment="Top" Width="898">
+        <Grid HorizontalAlignment="Left" Height="45" Margin="0,529,0,0" VerticalAlignment="Top" Width="898">
             <Path x:Name="Back" Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8H10V16H8M16,8V16L11,12" Fill="White" Width="35" Height="35" Stretch="Fill" Margin="25,5,0,5" HorizontalAlignment="Left" />
             <Path x:Name="next" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible" VerticalAlignment="Center" Margin="96.25,5,0,5"  Stretch="Fill" Height="35" HorizontalAlignment="Left" Width="35" MouseLeftButtonDown="next_MouseLeftButtonDown"/>
             <Path x:Name="pause" Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Hidden"/>
