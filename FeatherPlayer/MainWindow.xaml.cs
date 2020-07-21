@@ -31,7 +31,7 @@ namespace FeatherPlayer
             pausedata = Geometry.Parse(pausestr);
             InitializeComponent();
 
-            
+            //123
         }
         public enum playStatus
         {
