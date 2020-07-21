@@ -29,9 +29,8 @@ namespace FeatherPlayer
             string pausestr = "M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
             nextdata = Geometry.Parse(nextstr);
             pausedata = Geometry.Parse(pausestr);
+            VisibilityProperty = Visibility.Hidden;
             InitializeComponent();
-            //`12312312312312
-            
         }
         public enum playStatus
         {
