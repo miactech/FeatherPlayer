@@ -22,7 +22,7 @@
             </Grid>
         </Grid>
         <TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top" d:IsHidden="True"><Run Text="Hello! "/><LineBreak/><Run Text="Welcome to use Feather Player"/><Run FontStyle="Italic" Text="!"/></TextBlock>
-        <Grid HorizontalAlignment="Left" Height="45" Margin="0,529,0,0" VerticalAlignment="Top" Width="898">
+        <Grid HorizontalAlignment="Left" Height="45" Margin="0,529,0,0" VerticalAlignment="Top" Width="928">
             <Path x:Name="Back" Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8H10V16H8M16,8V16L11,12" Fill="White" Width="35" Height="35" Stretch="Fill" Margin="25,5,0,5" HorizontalAlignment="Left" />
             <Path x:Name="next" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible" VerticalAlignment="Center" Margin="96.25,5,0,5"  Stretch="Fill" Height="35" HorizontalAlignment="Left" Width="35" MouseLeftButtonDown="next_MouseLeftButtonDown"/>
             <Path x:Name="pause" Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Hidden"/>
