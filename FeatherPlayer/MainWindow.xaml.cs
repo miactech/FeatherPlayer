@@ -1,4 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using CSCore;
+using CSCore.Codecs.MP3;
+using CSCore.CoreAudioAPI;
+using CSCore.SoundOut;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +33,7 @@ namespace FeatherPlayer
             string pausestr = "M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
             nextdata = Geometry.Parse(nextstr);
             pausedata = Geometry.Parse(pausestr);
-            
+            soundOut = GetSoundOut();
             InitializeComponent();
         }
         public enum playStatus
@@ -40,6 +44,7 @@ namespace FeatherPlayer
         }
 
         playStatus playstatus = playStatus.Unloaded;
+        ISoundOut soundOut;
         Geometry pausedata,nextdata;//initialize the icons
         private void wndMain_Loaded(object sender, RoutedEventArgs e)
         {
@@ -51,7 +56,7 @@ namespace FeatherPlayer
 
         private void wndMain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void btnExit_MouseEnter(object sender, MouseEventArgs e)
@@ -80,7 +85,7 @@ namespace FeatherPlayer
             btnExitBackground.Background = Brushes.OrangeRed;
             Application.Current.Shutdown();
         }
-
+        MusicPlayer mp = new MusicPlayer();
         private void next_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -96,18 +101,35 @@ namespace FeatherPlayer
                     if (opfflac.ShowDialog() == true)
                     {
                         FileStream fs = new FileStream(opfflac.FileName, FileMode.Open);
-                        // CSCore.Codecs.FLAC.FlacFile ff = new CSCore.Codecs.FLAC.FlacFile(fs);
-                        //CSCore.Codecs.CodecFactory cf = new CSCore.Codecs.CodecFactory();
-                        Action<CSCore.Codecs.FLAC.FlacPreScanFinishedEventArgs> act = (CSCore.Codecs.FLAC.FlacPreScanFinishedEventArgs eventarg) => {
-
-                        };
-                        CSCore.Codecs.FLAC.FlacFile ff = new CSCore.Codecs.FLAC.FlacFile(fs, CSCore.Codecs.FLAC.FlacPreScanMode.Async, act);
-                        // CSCore.XAudio2.
-                        //ff.WaveFormat.
+                        //mp.Open(opfflac.FileName,new MMDevice());
                     }
                     break;
+                case playStatus.Playing:
+                    soundOut.Pause();
+                    playstatus = playStatus.Paused;
+                    break;
+                case playStatus.Paused:
+                    soundOut.Resume();
+                    playstatus = playStatus.Playing;
+                    break;
+                    
 
             }
+        }
+
+        private ISoundOut GetSoundOut()
+        {
+            if (WasapiOut.IsSupportedOnCurrentPlatform)
+                return new WasapiOut();
+            else
+                return new DirectSoundOut();
+        }
+
+        private IWaveSource GetSoundSource(Stream stream)
+        {
+            // Instead of using the CodecFactory as helper, you specify the decoder directly:
+            return new DmoMp3Decoder(stream);
+
         }
     }
 }

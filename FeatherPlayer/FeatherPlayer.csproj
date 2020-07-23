@@ -62,6 +62,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AudioInfo.cs" />
+    <Compile Include="MusicPlayer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="XmlStruct.cs" />
     <Page Include="Icons.xaml">
       <SubType>Designer</SubType>
