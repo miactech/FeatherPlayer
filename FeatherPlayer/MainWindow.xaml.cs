@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,8 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Un4seen.Bass;
 
 namespace FeatherPlayer
 {
@@ -43,15 +41,15 @@ namespace FeatherPlayer
         Geometry pausedata,nextdata;//initialize the icons
         private void wndMain_Loaded(object sender, RoutedEventArgs e)
         {
-
             Blur.EnableBlur(this);
-            AudioInfo.wav.WavInfo wi = AudioInfo.wav.GetWavInfo("test.wav");
+            //AudioInfo.wav.WavInfo wi = AudioInfo.wav.GetWavInfo("test.wav");
             //MessageBox.Show("Test");
         }
 
         private void wndMain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            try { DragMove(); }
+            catch { }
         }
 
         private void btnExit_MouseEnter(object sender, MouseEventArgs e)
@@ -61,7 +59,7 @@ namespace FeatherPlayer
                 To = 1.0,
                 Duration = TimeSpan.FromMilliseconds(200)
             };
-            btnExitBackground.BeginAnimation(Canvas.OpacityProperty, daToRed);
+            btnExitBackground.BeginAnimation(OpacityProperty, daToRed);
         }
 
         private void btnExit_MouseLeave(object sender, MouseEventArgs e)
@@ -72,17 +70,163 @@ namespace FeatherPlayer
                 To = 0.0,
                 Duration = TimeSpan.FromMilliseconds(200)
             };
-            btnExitBackground.BeginAnimation(Canvas.OpacityProperty, daToTrans);
+            btnExitBackground.BeginAnimation(OpacityProperty, daToTrans);
         }
 
         private void btnExit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             btnExitBackground.Background = Brushes.OrangeRed;
             Application.Current.Shutdown();
+        }      
+
+        private void PlayStop_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(PlayStop, 1, 0.9, 500);
         }
 
-        private void next_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void PlayStop_MouseLeave(object sender, MouseEventArgs e)
         {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(PlayStop, 0.9, 1, 500);
+        }
+
+        private void Back_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(Back, 1, 0.9, 500);
+        }
+
+        private void Back_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(Back, 0.9, 1, 500);
+        }
+
+        private void Next_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(Next, 1, 0.9, 500);
+        }
+
+        private void Next_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(Next, 0.9, 1, 500);
+        }
+
+        private void SongPic_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongPic, 1, 0.9, 500);
+        }
+
+        private void SongPic_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
+        }
+
+        private void SongList1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList1, 1, 0.9, 500);
+        }
+
+        private void SongList1_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList1, 0.9, 1, 500);
+        }
+
+        private void SongList2_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList2, 1, 0.9, 500);
+        }
+
+        private void SongList2_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList2, 0.9, 1, 500);
+        }
+
+        private void SongList3_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList3, 1, 0.9, 500);
+        }
+
+        private void SongList3_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList3, 0.9, 1, 500);
+        }
+
+        private void SongList4_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList4, 1, 0.9, 500);
+        }
+
+        private void SongList4_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList4, 0.9, 1, 500);
+        }
+
+        private void SongList5_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList5, 1, 0.9, 500);
+        }
+
+        private void SongList5_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList5, 0.9, 1, 500);
+        }
+
+        private void SongList6_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList6, 1, 0.9, 500);
+        }
+
+        private void SongList6_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList6, 0.9, 1, 500);
+        }
+
+        private void SongList7_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList7, 1, 0.9, 500);
+        }
+
+        private void SongList7_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList7, 0.9, 1, 500);
+        }
+
+        private void SongList8_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList8, 1, 0.9, 500);
+        }
+
+        private void SongList8_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(SongList8, 0.9, 1, 500);
+        }
+
+        private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string fileName;
+            int stream;
             switch (playstatus)
             {
                 case playStatus.Unloaded:
@@ -94,18 +238,15 @@ namespace FeatherPlayer
                     };
                     if (opfflac.ShowDialog() == true)
                     {
-                        FileStream fs = new FileStream(opfflac.FileName, FileMode.Open);
-                        // CSCore.Codecs.FLAC.FlacFile ff = new CSCore.Codecs.FLAC.FlacFile(fs);
-                        //CSCore.Codecs.CodecFactory cf = new CSCore.Codecs.CodecFactory();
-                        Action<CSCore.Codecs.FLAC.FlacPreScanFinishedEventArgs> act = (CSCore.Codecs.FLAC.FlacPreScanFinishedEventArgs eventarg) => {
-
-                        };
-                        CSCore.Codecs.FLAC.FlacFile ff = new CSCore.Codecs.FLAC.FlacFile(fs, CSCore.Codecs.FLAC.FlacPreScanMode.Async, act);
-                        // CSCore.XAudio2.
-                        //ff.WaveFormat.
+                        fileName = opfflac.FileName;
+                        //第一个参数是文件名，
+                        //第二个参数是文件流开始位置，
+                        //第三个是文件流长度 0为使用文件整个长度，
+                        //最后一个是流的创建模式
+                        stream = Bass.BASS_StreamCreateFile(fileName, 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);
+                        Bass.BASS_ChannelPlay(stream, true); //开始播放
                     }
                     break;
-
             }
         }
     }

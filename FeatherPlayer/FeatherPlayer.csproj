@@ -37,6 +37,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bass.Net, Version=2.4.12.6, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bass.Net.dll</HintPath>
+    </Reference>
     <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
       <HintPath>..\packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
       <Private>True</Private>
@@ -62,6 +66,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AudioInfo.cs" />
+    <Compile Include="btnMove.cs" />
+    <Compile Include="btnOpacity.cs" />
     <Compile Include="XmlStruct.cs" />
     <Page Include="Icons.xaml">
       <SubType>Designer</SubType>
