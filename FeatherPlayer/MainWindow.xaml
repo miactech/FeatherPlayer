@@ -300,7 +300,6 @@
                 <DropShadowEffect ShadowDepth="1" BlurRadius="5" Color="Black"/>
             </Grid.Effect>
             <Path x:Name="Back" Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8H10V16H8M16,8V16L11,12" Fill="White" Width="35" Height="35" Stretch="Fill" Margin="235.504,22,0,22" HorizontalAlignment="Left" MouseEnter="Back_MouseEnter" MouseLeave="Back_MouseLeave" />
-            <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible" Margin="293.616,16.352,0,15.736"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912" MouseEnter="PlayStop_MouseEnter" MouseLeave="PlayStop_MouseLeave" MouseLeftButtonDown="PlayStop_MouseLeftButtonDown"/>
             <Path x:Name="pause" Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Hidden"/>
             <Path x:Name="Next" Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8L13,12L8,16M14,8H16V16H14" Fill="White" Width="35" Stretch="Fill" Margin="361.384,22,0,22" HorizontalAlignment="Left" MouseEnter="Next_MouseEnter" MouseLeave="Next_MouseLeave" />
             <Label x:Name="lblSongTitle" Content="SongTitle" HorizontalAlignment="Left" Margin="91,14,0,37" FontSize="14" Foreground="White"/>
@@ -309,12 +308,142 @@
             <Slider x:Name="slider" HorizontalAlignment="Left" Margin="440,45,0,0" VerticalAlignment="Top" Width="685" Style="{DynamicResource FeatherSlider}"/>
             <Label x:Name="lblSongTime" Content="00:00 / 00:00" HorizontalAlignment="Left" Margin="440,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
             <Label x:Name="lblSongInformation" Content="48kHz / 24bit" HorizontalAlignment="Left" Margin="1025,14,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+            <Grid x:Name="btnPlayStop" HorizontalAlignment="Left" Height="47" Margin="294,16,0,0" VerticalAlignment="Top" Width="47" MouseEnter="PlayStop_MouseEnter" MouseLeave="PlayStop_MouseLeave" MouseLeftButtonDown="PlayStop_MouseLeftButtonDown">
+                <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912" />
+            </Grid>
         </Grid>
         <Label x:Name="lblMySongList" Content="我的歌单" HorizontalAlignment="Left" Margin="265,57,0,0" VerticalAlignment="Top" Foreground="White" FontSize="26"/>
-        <Grid HorizontalAlignment="Left" Height="620" Margin="1,0,0,0" VerticalAlignment="Top" Width="199" Background="#FF094272">
+        <Grid x:Name="gridMenu" HorizontalAlignment="Left" Height="620" Margin="1,0,0,0" VerticalAlignment="Top" Width="199" Background="#FF094272">
             <Grid x:Name="SongList" HorizontalAlignment="Left" Height="60" Margin="0,90,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
             <Grid x:Name="AllSong" HorizontalAlignment="Left" Height="60" Margin="0,175,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
             <Grid x:Name="Setting" HorizontalAlignment="Left" Height="60" Margin="0,260,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
+            <Viewbox x:Name="logoFeatherPlayer" Margin="0,-34,0,479">
+                <Canvas Width="266" Height="278" Canvas.Left="0" Canvas.Top="0">
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path83" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M76.706 132.941c-3.349-0.649-6.504-1.161-9.59-1.944    c-0.604-0.153-1.292-1.334-1.344-2.081c-0.409-5.886-4.113-8.319-9.779-6.253c-0.377 0.137-0.614 0.664-0.916 1.01    c0.391 0.245 0.784 0.702 1.171 0.697c1.331-0.016 2.664-0.333 3.987-0.283c3.006 0.114 3.74 1.146 3.273 4.31    c-6.031 1.426-11.292-1.459-16.732-3.146c-1.375-0.426-2.44-2.6-3.669-2.619c-5.411-0.085-9.78-2.802-14.477-4.833    c-3.648-1.578-6.624-4.188-10.443-5.536c1.832 1.31 3.664 2.62 6.345 4.538c-5.477-0.611-9.442 0.125-10.079 6.199    c-1.342-1.938-2.684-3.877-4.3-6.212c1.551-0.085 2.455-0.136 3.359-0.186c-7.597-2.929-6.732-10.262-9.147-16.413    c1.168 0.128 1.875 0.053 2.451 0.292c15.373 6.38 31.549 10.033 47.617 14.05c5.526 1.381 11.108 2.555 16.595 4.072    c1.819 0.503 3.421 1.788 5.274 2.798c-1.446 0.938-2.281 1.481-3.117 2.023c1.071 0.408 2.143 0.815 3.521 1.339    C76.706 127.135 76.706 129.832 76.706 132.941z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path85" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M91.968 138.21c0.79 0.409 1.543 1.063 2.375 1.187    c4.317 0.632 8.655 1.129 13.113 2.138c-2.327 0.582-4.64 1.229-6.984 1.734c-11.623 2.504-23.344 4.092-35.27 3.411    c-7.704-0.44-15.227-1.758-22.213-5.258c-1.222-0.613-2.374-1.367-3.917-2.265c3.031-0.316 5.525-0.577 8.02-0.838    c0.042-0.35 0.084-0.698 0.126-1.048c-0.728-0.187-1.456-0.529-2.183-0.528c-1.417 0.003-2.847 0.38-4.246 0.271    c-1.957-0.152-3.458-1.094-3.865-2.802c5.756 0 11.382 0 16.987 0c1.734 4.435 3.162 5.162 7.771 4.21    c1.026-0.213 2.134-0.032 3.595-0.032c0.124-1.197 0.272-2.627 0.448-4.328c2.42 0.426 4.709 0.829 6.997 1.231    c0.018-0.079 0.035-0.158 0.052-0.237c-2.391-0.709-4.782-1.417-7.174-2.126c0.12-0.432 0.24-0.861 0.359-1.292    c3.701 0.784 7.402 1.569 11.103 2.354c-0.415 0.696-0.829 1.393-1.097 1.844c0.391 0.471 0.948 1.026 1.367 1.671    c0.99 1.525 4.346 2.899 4.965 1.776c1.586-2.879 3.623-0.694 5.384-0.938c1.438-0.198 2.925-0.038 4.39-0.038L91.968 138.21z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path87" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M36.658 123.472c-2.679 3.847-2.369 7.952-1.731 12.379    c-2.459-5.117-8.215-4.481-12.802-7.638c1.872 0 2.969 0.07 4.049-0.035c0.407-0.04 0.775-0.484 1.161-0.743    c-0.388-0.346-0.764-0.971-1.168-0.99c-2.123-0.1-4.252-0.047-6.653-0.047c0.312 0.65 0.505 1.052 0.78 1.624    c-1.03 0.08-1.972 0.153-3.315 0.257c0 2.729 0.057 5.464-0.042 8.192c-0.023 0.63-0.581 1.24-0.893 1.859    c-0.305-0.626-0.861-1.247-0.874-1.879c-0.081-3.995-0.041-7.993-0.041-12.175c0.723 0.15 1.246 0.258 1.905 0.395    c0-0.985-0.046-1.788 0.009-2.583c0.159-2.309 1.291-3.517 3.735-3.595C27.499 118.28 27.715 118.302 36.658 123.472z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path89" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M118.491 150.027c1.62-1.911 2.813-3.318 4.007-4.726    c-5.646 1.791-9.416 7.302-16.514 7.524c3.321-2.083 5.434-4.271 6.048-7.809c-4.041 1.216-7.678 2.527-11.421 3.374    c-3.741 0.848-7.512 0.432-10.653-0.621c6.491-2.013 13.244-4.342 20.14-6.114c2.368-0.608 5.097 0.138 7.655 0.331    c4.679 0.355 9.354 0.76 14.068 1.146C127.502 145.367 123.306 147.537 118.491 150.027z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path91" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M100.647 136.366c4.272 0.539 8.535 1.196 12.822 1.566    c2.171 0.188 4.386-0.145 6.605 0.329c-1.6 0-3.2 0-4.799 0c0.003 0.097 0.007 0.192 0.011 0.289    c6.882 0.296 13.764 0.612 20.648 0.877c2.667 0.104 5.343 0.195 8.008 0.099c2.607-0.094 4.574 0.864 6.447 3.364    c-19.868-0.152-39.182-1.907-58.421-4.681l0.105 0.097c0.018-2.02 1.125-2.306 2.896-2.085    C96.84 136.453 98.753 136.333 100.647 136.366z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path93" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M78.654 133.489c-0.137-3.467 0.792-7.035-1.394-10.299    c-0.538-0.804-0.2-2.196-0.299-3.897c0.836 1.246 1.338 1.992 1.836 2.74c0.128 1.981 1.702 2.992 3.345 2.097    c0.295-0.161 0.605-0.697 0.549-0.99c-0.058-0.302-0.527-0.688-0.865-0.744c-1.02-0.17-2.064-0.199-3.099-0.283    c0-0.784 0-1.567 0-3.024c4.15 1.649 7.947 3.158 11.745 4.667c0 3.689 0 7.377 0 11.271c-2.281-0.26-4.187-0.452-6.085-0.7    C82.471 134.076 80.564 133.771 78.654 133.489z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path95" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M110.543 131.674c-1.171-4.321 0.53-8.092 4.093-9.075    c5.188-1.432 9.452 2.534 8.347 7.826c-0.106 0.509-0.763 0.904-1.009 1.18c1.401 2.026 2.787 4.032 4.173 6.038    c-0.19 0.284-0.381 0.568-0.572 0.853c-1.041-0.461-2.042-1.099-3.132-1.335c-1.119-0.241-2.351-0.266-3.484-0.081    c-3.914 0.636-6.066-0.646-6.991-4.683c1.113 0.453 2.02 0.849 2.946 1.19c0.883 0.324 1.788 0.592 3.482 1.147    c-0.808-1.481-1.231-2.257-1.781-3.266c1.198-0.067 2.297-0.13 3.766-0.214c-0.491-0.53-0.787-0.848-0.918-0.99    c0.555-0.741 1.65-1.658 1.484-2.085c-0.536-1.378-1.249-3.173-2.411-3.733c-3.557-1.714-6.572 0.725-6.415 4.916    c1.072-0.105 2.141-0.211 2.797-0.275c0 0.957 0 1.518 0 2.064c-1.471 0.156-2.939 0.313-4.407 0.469L110.543 131.674z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path99" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M239.188 131.324c-3.907 0-7.449 0-11.177 0    c0.736 7.521 6.17 5.651 10.763 5.354c-0.16 0.718-0.122 1.202-0.319 1.334c-4.804 3.203-11.641-0.041-12.052-5.729    c-0.096-1.325-0.085-2.687 0.11-3.997c0.619-4.159 2.935-6.159 6.789-6.016c3.602 0.133 5.607 2.374 5.88 6.595    C239.227 129.563 239.188 130.264 239.188 131.324z M237.483 129.342c-0.64-4.271-1.87-5.514-4.912-5.307    c-2.954 0.201-4.216 1.775-4.147 5.307C231.375 129.342 234.326 129.342 237.483 129.342z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path101" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M158.26 116.839c2.996 0 5.568-0.151 8.115 0.039    c3.045 0.228 4.929 2.449 5.235 5.751c0.285 3.075-1.433 5.817-4.385 6.44c-2.308 0.488-4.705 0.551-7.598 0.859    c0 2.733 0 5.534 0 8.335c-0.432-0.009-0.863-0.019-1.295-0.028C158.076 131.298 158.244 124.349 158.26 116.839z     M159.981 118.589c0 3.24 0 6.06 0 9.274c3.208-0.207 6.569 1.098 8.99-1.929c1.41-1.762 1.322-3.994-0.003-5.737    C166.614 117.101 163.288 118.818 159.981 118.589z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path103" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M197.978 128.531c0.227-3.459-0.574-4.401-3.723-4.504    c-0.619-0.02-1.253 0.159-1.859 0.082c-0.991-0.126-1.966-0.387-2.948-0.591c0.979-0.389 1.942-1.045 2.942-1.105    c1.569-0.096 3.238-0.032 4.718 0.433c0.951 0.3 2.291 1.409 2.332 2.212c0.227 4.468 0.108 8.953 0.108 13.047    c-1.68 0.16-3.076 0.186-4.427 0.444c-3.511 0.671-6.035-0.706-6.56-3.69c-0.51-2.906 1.431-5.382 4.728-5.897    C194.771 128.729 196.279 128.681 197.978 128.531z M197.782 130.401c-1.697 0.122-3.469 0.085-5.168 0.414    c-1.894 0.368-2.52 1.907-2.299 3.657c0.223 1.77 1.415 2.56 3.193 2.534C197.813 136.945 198.708 135.671 197.782 130.401z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path105" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M207.091 143.213c0.608-0.206 1.204-0.527 1.829-0.599    c3.091-0.349 4.619-2.703 3.521-5.639c-1.711-4.568-3.485-9.113-5.231-13.667c0.211-0.205 0.423-0.41 0.635-0.615    c0.518 0.527 1.256 0.964 1.517 1.597c1.449 3.522 2.783 7.091 4.316 11.056c2.041-4.323 2.39-8.928 4.479-12.755    c0.404 0.154 0.809 0.308 1.213 0.461c-0.27 0.968-0.52 1.942-0.811 2.904c-1.442 4.761-2.852 9.532-4.359 14.272    c-1.184 3.723-2.961 4.622-6.906 3.695C207.225 143.687 207.157 143.449 207.091 143.213z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path107" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M100.631 136.434c-1.756-0.256-3.522-0.779-5.264-0.707    c-2.753 0.115-3.318-1.179-3.138-3.567c0.164-2.173 0.035-4.369 0.035-7.102c3.163 1.943 5.772 3.546 8.382 5.15    C100.641 132.282 100.636 134.358 100.631 136.434z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path109" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M36.221 131.445c3.858 0 7.413 0 11.095 0    c0.136-1.146 0.236-1.991 0.377-3.174c2.509 0.931 4.84 1.796 7.253 2.69C53.189 133.489 38.628 133.903 36.221 131.445z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path111" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M100.561 130.265c0.253-5.155-1.342-6.454-6.488-5.646    c-1.157 0.182-2.448-0.492-3.677-0.771c0-2.278 0-4.555 0-6.833c0.321-0.055 0.642-0.109 0.963-0.165    c1.932 1.559 0.094 4.261 1.213 6.066c8.845-0.162 10.527 1.243 9.52 8.222C101.53 130.818 101.046 130.541 100.561 130.265z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path113" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M130.84 138.262c0-5.234 0-10.469 0-15.214c2.231 0 4.349 0 6.917 0    c-0.452 0.421-0.835 1.053-1.369 1.232c-4.017 1.349-4.025 1.321-4.027 5.604c-0.001 2.223 0.054 4.448-0.043 6.666    c-0.029 0.649-0.494 1.28-0.76 1.919C131.319 138.4 131.08 138.331 130.84 138.262z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path115" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M247.285 138.213c0-5.219 0-10.437 0-14.939    c2.41-0.241 4.474-0.449 6.537-0.656c0.145 0.163 0.289 0.325 0.433 0.487c-0.479 0.398-0.897 0.996-1.447 1.164    c-4.073 1.242-4.118 1.264-4.119 5.471c-0.001 2.222 0.031 4.443-0.022 6.664c-0.016 0.662-0.271 1.318-0.418 1.977    C247.928 138.325 247.606 138.27 247.285 138.213z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path117" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M179.953 138.941c-0.35-1.024-0.69-1.563-0.694-2.104    c-0.037-6.301-0.04-12.601 0.004-18.901c0.004-0.5 0.425-0.997 0.651-1.496c0.327 0.394 0.938 0.787 0.938 1.183    c0.026 6.74-0.021 13.48-0.068 20.22C180.783 137.979 180.59 138.114 179.953 138.941z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path119" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M36.628 129.251c0.159-4.38 1.316-5.216 5.073-3.512    c1.518 0.689 3.875 0.628 3.839 3.512C42.52 129.251 39.578 129.251 36.628 129.251z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path121" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M110.513 131.62c0.101 1.736 0.203 3.472 0.329 5.631    c-3.44-1.808-4.809-5.827-7.976-7.996c2.932-0.346 5.33 0.924 7.671 2.411C110.543 131.674 110.513 131.62 110.513 131.62z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path123" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M58.791 137.529c-0.928-1.021-1.776-1.954-2.624-2.886    c0.775-0.646 1.539-1.815 2.327-1.832c1.667-0.035 3.361 0.479 5.002 0.925c0.182 0.049 0.311 1.521 0.083 1.646    C62.235 136.13 60.777 136.673 58.791 137.529z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path125" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M107.868 136.461c-5.586 0.541-5.902 0.266-5.042-4.249    C104.465 133.594 105.958 134.852 107.868 136.461z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path127" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M56.697 130.852c-1.723-0.669-3.319-1.282-4.911-1.908    c-1.563-0.614-3.124-1.24-4.685-1.86c0.092-0.255 0.185-0.51 0.277-0.765c2.738 0.816 5.512 1.538 8.188 2.523    C56.14 129.053 56.362 130.22 56.697 130.852z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path129" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M58.731 131.252c3.061-1.802 3.857-1.646 5.095 1.203    C62.016 132.027 60.481 131.666 58.731 131.252z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path133" Fill="#FFFFFF">
+                        <Path.Data>
+                            <PathGeometry Figures="M78.731 134.113c3.252 0.457 6.515 0.851 9.748 1.418    c0.769 0.135 1.436 0.849 2.149 1.296c-0.155 0.351-0.309 0.702-0.463 1.053c-1.891-0.248-3.774-0.587-5.672-0.707    c-1.033-0.065-2.109 0.155-3.128 0.4c-1.239 0.299-2.531-1.387-2.6-3.498L78.731 134.113z" FillRule="EvenOdd"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Viewbox>
+
+
         </Grid>
         <Label x:Name="lblMySongListPath" Content="X:\XXX\XXXX" HorizontalAlignment="Left" Margin="384,69,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B" FontSize="14"/>
     </Grid>

@@ -95,14 +95,14 @@ namespace FeatherPlayer
 
         private void PlayStop_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
-            btnMove.ScaleEasingAnimationShow(PlayStop, 1, 0.9, 500);
+            btnOpacity.FloatElement(btnPlayStop, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(btnPlayStop, 1, 0.9, 500);
         }
 
         private void PlayStop_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
-            btnMove.ScaleEasingAnimationShow(PlayStop, 0.9, 1, 500);
+            btnOpacity.FloatElement(btnPlayStop, 1, 200);
+            btnMove.ScaleEasingAnimationShow(btnPlayStop, 0.9, 1, 500);
         }
 
         private void Back_MouseEnter(object sender, MouseEventArgs e)
