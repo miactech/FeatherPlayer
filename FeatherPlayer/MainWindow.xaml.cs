@@ -12,7 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using Un4seen.Bass;
+using CSCore;
+using CSCore.Codecs;
+using CSCore.CoreAudioAPI;
+using CSCore.SoundOut;
 
 namespace FeatherPlayer
 {
@@ -21,15 +24,27 @@ namespace FeatherPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
+        playStatus playstatus = playStatus.Unloaded;
+        Geometry pausedata, continuedata;//initialize the icons
+        MusicPlayer player;
         public MainWindow()
         {
-            string nextstr = "M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
+            string continuedatastr = "M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
             string pausestr = "M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
-            nextdata = Geometry.Parse(nextstr);
-            pausedata = Geometry.Parse(pausestr);          
+            continuedata = Geometry.Parse(continuedatastr);
+            pausedata = Geometry.Parse(pausestr);
+
+            player = new FeatherPlayer.MusicPlayer();
+            player.PlaybackStopped += Player_PlaybackStopped;
+              
             InitializeComponent();
             //playGrid.Visibility = Visibility.Hidden;
         }
+
+
+
         public enum playStatus
         {
             Playing,
@@ -37,8 +52,6 @@ namespace FeatherPlayer
             Unloaded
         }
 
-        playStatus playstatus = playStatus.Unloaded;
-        Geometry pausedata,nextdata;//initialize the icons
         private void wndMain_Loaded(object sender, RoutedEventArgs e)
         {
             Blur.EnableBlur(this);
@@ -226,28 +239,47 @@ namespace FeatherPlayer
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             string fileName;
-            int stream;
-            switch (playstatus)
+            //int stream;
+            switch (player.PlaybackState)
             {
-                case playStatus.Unloaded:
+                case PlaybackState.Stopped:
                     //nothing loaded
+
                     OpenFileDialog opfflac = new OpenFileDialog()
                     {
                         Title = "No music loaded. Please select a valid audio file.",
-                        Filter = "FreeLosslessAudioCodec|*.flac|MPEG-3|*.mp3|Wave|*.wav"
+                        Filter = CodecFactory.SupportedFilesFilterEn //"FreeLosslessAudioCodec|*.flac|MPEG-3|*.mp3|Wave|*.wav"
                     };
+
                     if (opfflac.ShowDialog() == true)
                     {
+                        var mmdeviceEnumerator = new MMDeviceEnumerator();
+                        MMDevice device = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
                         fileName = opfflac.FileName;
+                        player.Open(fileName, device);
+                        player.Play();
+                        PlayStop.Data = pausedata;
                         //第一个参数是文件名，
                         //第二个参数是文件流开始位置，
                         //第三个是文件流长度 0为使用文件整个长度，
                         //最后一个是流的创建模式
-                        stream = Bass.BASS_StreamCreateFile(fileName, 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);
-                        Bass.BASS_ChannelPlay(stream, true); //开始播放
+                        //stream = Bass.BASS_StreamCreateFile(fileName, 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);
+                        //Bass.BASS_ChannelPlay(stream, true); //开始播放
                     }
                     break;
+                case PlaybackState.Playing:
+                    PlayStop.Data = continuedata;
+                    player.Pause();
+                    break;
+                case PlaybackState.Paused:
+                    PlayStop.Data = pausedata;
+                    player.Play();
+                    break;
             }
+        }
+        private void Player_PlaybackStopped(object sender, CSCore.SoundOut.PlaybackStoppedEventArgs e)
+        {
+            PlayStop.Data = continuedata;
         }
     }
 }
