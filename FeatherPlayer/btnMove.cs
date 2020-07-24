@@ -8,11 +8,11 @@ namespace FeatherPlayer
     class btnMove
     {
         /// <summary>
-        /// 缓动动画
+        /// 缓动缩放动画
         /// </summary>
         /// <param name="element">控件名</param>
         /// <param name="from">元素开始的大小</param>
-        /// <param name="from">元素到达的大小</param>
+        /// <param name="to">元素到达的大小</param>
         /// <param name="time">持续时间(毫秒)</param>
         public static void ScaleEasingAnimationShow(FrameworkElement element, double from, double to,int time)
         {

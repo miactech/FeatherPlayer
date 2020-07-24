@@ -237,6 +237,18 @@ namespace FeatherPlayer
             btnMove.ScaleEasingAnimationShow(SongList8, 0.9, 1, 500);
         }
 
+        private void SongList1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            btnOpacity.FloatElement(SongList1, 0.8, 200);
+            btnMove.ScaleEasingAnimationShow(SongList1, 0.9, 0.8, 500);
+        }
+
+        private void SongList1_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            btnOpacity.FloatElement(SongList1, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(SongList1, 0.8, 0.9, 500);
+        }
+
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             string fileName;
@@ -278,7 +290,8 @@ namespace FeatherPlayer
                     break;
             }
         }
-        private void Player_PlaybackStopped(object sender, CSCore.SoundOut.PlaybackStoppedEventArgs e)
+
+        private void Player_PlaybackStopped(object sender, PlaybackStoppedEventArgs e)
         {
             PlayStop.Data = continuedata;
         }

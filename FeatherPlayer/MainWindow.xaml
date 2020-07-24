@@ -279,7 +279,7 @@
             <Grid x:Name="SongList7" Height="195" Margin="560,330,299,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList7_MouseEnter" MouseLeave="SongList7_MouseLeave"/>
             <Grid x:Name="SongList8" Height="195" Margin="800,330,59,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList8_MouseEnter" MouseLeave="SongList8_MouseLeave"/>
             <Grid x:Name="SongList2" HorizontalAlignment="Left" Height="195" Margin="320,80,0,0" VerticalAlignment="Top" Width="195" Background="White" MouseEnter="SongList2_MouseEnter" MouseLeave="SongList2_MouseLeave"/>
-            <Grid x:Name="SongList1" HorizontalAlignment="Left" Height="195" Margin="70,80,0,0" VerticalAlignment="Top" Width="195" Background="White" MouseEnter="SongList1_MouseEnter" MouseLeave="SongList1_MouseLeave"/>
+            <Grid x:Name="SongList1" HorizontalAlignment="Left" Height="195" Margin="70,80,0,0" VerticalAlignment="Top" Width="195" Background="White" MouseEnter="SongList1_MouseEnter" MouseLeave="SongList1_MouseLeave" MouseDown="SongList1_MouseDown" MouseUp="SongList1_MouseUp"/>
             <Grid x:Name="SongList4" Height="195" Margin="800,80,59,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList4_MouseEnter" MouseLeave="SongList4_MouseLeave"/>
             <Grid x:Name="SongList3" Height="195" Margin="560,80,299,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList3_MouseEnter" MouseLeave="SongList3_MouseLeave"/>
             <Grid.Effect>
