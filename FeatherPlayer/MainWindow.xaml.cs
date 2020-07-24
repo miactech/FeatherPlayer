@@ -89,6 +89,7 @@ namespace FeatherPlayer
         private void btnExit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             btnExitBackground.Background = Brushes.OrangeRed;
+            player.Stop();
             Application.Current.Shutdown();
         }      
 
@@ -106,133 +107,133 @@ namespace FeatherPlayer
 
         private void Back_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(Back, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(Back, 1, 0.9, 500);
         }
 
         private void Back_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(Back, 1, 200);
             btnMove.ScaleEasingAnimationShow(Back, 0.9, 1, 500);
         }
 
         private void Next_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(Next, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(Next, 1, 0.9, 500);
         }
 
         private void Next_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(Next, 1, 200);
             btnMove.ScaleEasingAnimationShow(Next, 0.9, 1, 500);
         }
 
         private void SongPic_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongPic, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongPic, 1, 0.9, 500);
         }
 
         private void SongPic_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongPic, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
         }
 
         private void SongList1_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList1, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList1, 1, 0.9, 500);
         }
 
         private void SongList1_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList1, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList1, 0.9, 1, 500);
         }
 
         private void SongList2_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList2, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList2, 1, 0.9, 500);
         }
 
         private void SongList2_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList2, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList2, 0.9, 1, 500);
         }
 
         private void SongList3_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList3, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList3, 1, 0.9, 500);
         }
 
         private void SongList3_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList3, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList3, 0.9, 1, 500);
         }
 
         private void SongList4_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList4, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList4, 1, 0.9, 500);
         }
 
         private void SongList4_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList4, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList4, 0.9, 1, 500);
         }
 
         private void SongList5_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList5, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList5, 1, 0.9, 500);
         }
 
         private void SongList5_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList5, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList5, 0.9, 1, 500);
         }
 
         private void SongList6_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList6, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList6, 1, 0.9, 500);
         }
 
         private void SongList6_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList6, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList6, 0.9, 1, 500);
         }
 
         private void SongList7_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList7, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList7, 1, 0.9, 500);
         }
 
         private void SongList7_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList7, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList7, 0.9, 1, 500);
         }
 
         private void SongList8_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 0.9, 200);
+            btnOpacity.FloatElement(SongList8, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList8, 1, 0.9, 500);
         }
 
         private void SongList8_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(PlayStop, 1, 200);
+            btnOpacity.FloatElement(SongList8, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongList8, 0.9, 1, 500);
         }
 

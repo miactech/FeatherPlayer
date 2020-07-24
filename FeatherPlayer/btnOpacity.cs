@@ -35,6 +35,7 @@ namespace FeatherPlayer
                     }
                     opacity = null;
                 };
+                
                 elem.BeginAnimation(UIElement.OpacityProperty, opacity);
             }
         }

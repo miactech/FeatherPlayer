@@ -10,7 +10,8 @@
         AllowsTransparency="True" WindowStyle="None"
         Background="#7A0097FF" Loaded="wndMain_Loaded" MouseLeftButtonDown="wndMain_MouseLeftButtonDown" BorderThickness="1" HorizontalAlignment="Center"
         >
-    <Window.Resources>
+    <!--Slider -->
+        <Window.Resources>
         <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5"/>
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FFDCECFC"/>
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF7Eb4EA"/>
@@ -293,7 +294,7 @@
                 </Canvas>
             </Grid>
         </Grid>
-        <TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top" d:IsHidden="True"><Run Text="Hello! "/><LineBreak/><Run Text=""/><Run FontStyle="Italic" Text="!"/></TextBlock>
+        <!--TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top" d:IsHidden="True"><Run Text="Hello! "/><LineBreak/><Run Text=""/><Run FontStyle="Italic" Text="!"/></-->
         <Grid x:Name="playGrid" HorizontalAlignment="Left" Height="79" Margin="0,620,0,0" VerticalAlignment="Top" Width="1254" Background="#7A0D5D95">
             <Grid.Effect>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="5" Color="Black"/>
