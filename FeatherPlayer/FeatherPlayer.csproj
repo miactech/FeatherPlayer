@@ -64,10 +64,23 @@
     <Compile Include="AudioInfo.cs" />
     <Compile Include="btnMove.cs" />
     <Compile Include="btnOpacity.cs" />
+    <Compile Include="fButton.xaml.cs">
+      <DependentUpon>fButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MusicPlayer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MySongList.xaml.cs">
+      <DependentUpon>MySongList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XmlStruct.cs" />
+    <Page Include="fButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +99,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MySongList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

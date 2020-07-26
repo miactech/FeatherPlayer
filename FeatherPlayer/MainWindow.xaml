@@ -8,10 +8,10 @@
         Title="FeatherPlayer" Height="701" Width="1256"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
         AllowsTransparency="True" WindowStyle="None"
-        Background="#7A0097FF" Loaded="wndMain_Loaded" MouseLeftButtonDown="wndMain_MouseLeftButtonDown" BorderThickness="1" HorizontalAlignment="Center"
+        Background="#7A0097FF" Loaded="wndMain_Loaded"  BorderThickness="1" HorizontalAlignment="Center"
         >
     <!--Slider -->
-        <Window.Resources>
+    <Window.Resources>
         <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5"/>
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FFDCECFC"/>
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF7Eb4EA"/>
@@ -273,26 +273,10 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid x:Name="grdMain" HorizontalAlignment="Left" Height="580" Margin="200,40,0,0" VerticalAlignment="Top" Width="1054" >
-            <Grid x:Name="SongList5" Height="195" Margin="70,330,789,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList5_MouseEnter" MouseLeave="SongList5_MouseLeave"/>
-            <Grid x:Name="SongList6" Height="195" Margin="320,330,539,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList6_MouseEnter" MouseLeave="SongList6_MouseLeave"/>
-            <Grid x:Name="SongList7" Height="195" Margin="560,330,299,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList7_MouseEnter" MouseLeave="SongList7_MouseLeave"/>
-            <Grid x:Name="SongList8" Height="195" Margin="800,330,59,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList8_MouseEnter" MouseLeave="SongList8_MouseLeave"/>
-            <Grid x:Name="SongList2" HorizontalAlignment="Left" Height="195" Margin="320,80,0,0" VerticalAlignment="Top" Width="195" Background="White" MouseEnter="SongList2_MouseEnter" MouseLeave="SongList2_MouseLeave"/>
-            <Grid x:Name="SongList1" HorizontalAlignment="Left" Height="195" Margin="70,80,0,0" VerticalAlignment="Top" Width="195" Background="White" MouseEnter="SongList1_MouseEnter" MouseLeave="SongList1_MouseLeave" MouseDown="SongList1_MouseDown" MouseUp="SongList1_MouseUp"/>
-            <Grid x:Name="SongList4" Height="195" Margin="800,80,59,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList4_MouseEnter" MouseLeave="SongList4_MouseLeave"/>
-            <Grid x:Name="SongList3" Height="195" Margin="560,80,299,0" VerticalAlignment="Top" Background="White" MouseEnter="SongList3_MouseEnter" MouseLeave="SongList3_MouseLeave"/>
-            <Grid.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="Black" Opacity="0.8"/>
-            </Grid.Effect>
-        </Grid>
-        <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="1,0,1,0">
-            <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown">
-                <Grid x:Name="btnExitBackground" Background="Red" Opacity="0"/>
-                <Canvas x:Name="CExit" Width="24" Height="24">
-                    <Path Fill="White" Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-                </Canvas>
-            </Grid>
+        <Grid x:Name="grdMain" HorizontalAlignment="Left"  Width="1054" Height="580" Margin="200,40,0,0" VerticalAlignment="Top" >
+            <Frame x:Name="frmPages" Source="/FeatherPlayer;component/MySongList.xaml" NavigationUIVisibility="Hidden"/>
+
+
         </Grid>
         <!--TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top" d:IsHidden="True"><Run Text="Hello! "/><LineBreak/><Run Text=""/><Run FontStyle="Italic" Text="!"/></-->
         <Grid x:Name="playGrid" HorizontalAlignment="Left" Height="79" Margin="0,620,0,0" VerticalAlignment="Top" Width="1254" Background="#7A0D5D95">
@@ -312,7 +296,18 @@
                 <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912" />
             </Grid>
         </Grid>
-        <Label x:Name="lblMySongList" Content="我的歌单" HorizontalAlignment="Left" Margin="265,57,0,0" VerticalAlignment="Top" Foreground="White" FontSize="26"/>
+        <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="1,0,0,0" MouseLeftButtonDown="gridTitle_MouseLeftButtonDown" Background="#FF094272">
+            <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown">
+                <Grid x:Name="btnExitBackground" Background="Red" Opacity="0"/>
+                <Canvas x:Name="CExit" Width="24" Height="24">
+                    <Path Fill="White" Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                </Canvas>
+            </Grid>
+            <Grid.Effect>
+                <DropShadowEffect Color="Black" Direction="270" Opacity="0.5" BlurRadius="10" ShadowDepth="3" />
+            </Grid.Effect>
+        </Grid>
+
         <Grid x:Name="gridMenu" HorizontalAlignment="Left" Height="620" Margin="1,0,0,0" VerticalAlignment="Top" Width="199" Background="#FF094272">
             <Grid x:Name="SongList" HorizontalAlignment="Left" Height="60" Margin="0,90,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
             <Grid x:Name="AllSong" HorizontalAlignment="Left" Height="60" Margin="0,175,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
@@ -442,9 +437,7 @@
                     </Path>
                 </Canvas>
             </Viewbox>
-
-
         </Grid>
-        <Label x:Name="lblMySongListPath" Content="X:\XXX\XXXX" HorizontalAlignment="Left" Margin="384,69,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B" FontSize="14"/>
+
     </Grid>
 </Window>
