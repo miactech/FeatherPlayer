@@ -154,9 +154,12 @@ namespace FeatherPlayer
                     {
                         var mmdeviceEnumerator = new MMDeviceEnumerator();
                         MMDevice device = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+                        
                         fileName = opfflac.FileName;
+                        
                         player.Open(fileName, device);
                         player.Play();
+                        player.Volume = 10;
                         PlayStop.Data = pausedata;
                         //第一个参数是文件名，
                         //第二个参数是文件流开始位置，
