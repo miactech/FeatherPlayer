@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FeatherPlayer"
         mc:Ignorable="d"
-        Title="FeatherPlayer" Height="701" Width="1256"
+        Title="FeatherPlayer" Height="701" Width="1291"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
         AllowsTransparency="True" WindowStyle="None"
         Background="#7A0097FF" Loaded="wndMain_Loaded"  BorderThickness="1" HorizontalAlignment="Center"
@@ -81,9 +81,6 @@
                         <EllipseGeometry Center="10,10" RadiusX="10" RadiusY="10"></EllipseGeometry>
                     </Path.Data>
                 </Path>
-                <Grid.Effect>
-                    <DropShadowEffect ShadowDepth="-5" BlurRadius="2" Color="#0E5688"/>
-                </Grid.Effect>
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
@@ -273,46 +270,38 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid x:Name="grdMain" HorizontalAlignment="Left"  Width="1054" Height="580" Margin="200,40,0,0" VerticalAlignment="Top" >
-            <Frame x:Name="frmPages" Source="/FeatherPlayer;component/MySongList.xaml" NavigationUIVisibility="Hidden"/>
+        <Grid x:Name="grdMain" HorizontalAlignment="Left"  Width="1089" Height="580" Margin="200,40,0,0" VerticalAlignment="Top" >
+            <Frame x:Name="frmPages" Source="/FeatherPlayer;component/MySongList.xaml" NavigationUIVisibility="Hidden" Background="#FF0F5789" MouseDown="frmPages_MouseDown"/>
+            <Rectangle Fill="#FF0F5789" HorizontalAlignment="Left" Height="700" Margin="-200,-40,0,-80" VerticalAlignment="Top" Width="200" Opacity="0.6"/>
 
 
         </Grid>
         <!--TextBlock x:Name="textBlock" Margin="107.926,165.2,116.926,0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="40" d:LayoutOverrides="Width" VerticalAlignment="Top" d:IsHidden="True"><Run Text="Hello! "/><LineBreak/><Run Text=""/><Run FontStyle="Italic" Text="!"/></-->
-        <Grid x:Name="playGrid" HorizontalAlignment="Left" Height="79" Margin="0,620,0,0" VerticalAlignment="Top" Width="1254" Background="#7A0D5D95">
-            <Grid.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="5" Color="Black"/>
-            </Grid.Effect>
+        <Grid x:Name="playGrid" HorizontalAlignment="Left" Height="79" Margin="200,620,0,0" VerticalAlignment="Top" Width="1089" Background="#FF0F5789">
             <Path x:Name="Back" Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8H10V16H8M16,8V16L11,12" Fill="White" Width="35" Height="35" Stretch="Fill" Margin="235.504,22,0,22" HorizontalAlignment="Left" MouseEnter="Back_MouseEnter" MouseLeave="Back_MouseLeave" />
             <Path x:Name="pause" Data="M15,16H13V8H15M11,16H9V8H11M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Hidden"/>
             <Path x:Name="Next" Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8L13,12L8,16M14,8H16V16H14" Fill="White" Width="35" Stretch="Fill" Margin="361.384,22,0,22" HorizontalAlignment="Left" MouseEnter="Next_MouseEnter" MouseLeave="Next_MouseLeave" />
             <Label x:Name="lblSongTitle" Content="SongTitle" HorizontalAlignment="Left" Margin="91,14,0,37" FontSize="14" Foreground="White"/>
             <Grid x:Name="SongPic" HorizontalAlignment="Left" Margin="26,16,0,16" Width="47" Background="White" MouseEnter="SongPic_MouseEnter" MouseLeave="SongPic_MouseLeave"/>
             <Label x:Name="lblSinger" Content="Singer" HorizontalAlignment="Left" Margin="91,40,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B"/>
-            <Slider x:Name="slider" HorizontalAlignment="Left" Margin="440,45,0,0" VerticalAlignment="Top" Width="685" Style="{DynamicResource FeatherSlider}"/>
+            <Slider x:Name="slider" HorizontalAlignment="Left" Margin="440,45,0,0" VerticalAlignment="Top" Width="570" Style="{DynamicResource FeatherSlider}"/>
             <Label x:Name="lblSongTime" Content="00:00 / 00:00" HorizontalAlignment="Left" Margin="440,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-            <Label x:Name="lblSongInformation" Content="48kHz / 24bit" HorizontalAlignment="Left" Margin="1025,14,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+            <Label x:Name="lblSongInformation" Content="48kHz / 24bit" HorizontalAlignment="Left" Margin="910,14,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
             <Grid x:Name="btnPlayStop" HorizontalAlignment="Left" Height="47" Margin="294,16,0,0" VerticalAlignment="Top" Width="47" MouseEnter="PlayStop_MouseEnter" MouseLeave="PlayStop_MouseLeave" MouseLeftButtonDown="PlayStop_MouseLeftButtonDown">
                 <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912" />
             </Grid>
         </Grid>
-        <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="1,0,0,0" MouseLeftButtonDown="gridTitle_MouseLeftButtonDown" Background="#FF094272">
+        <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="200,0,0,0" MouseLeftButtonDown="gridTitle_MouseLeftButtonDown" Background="#FF0F5789">
             <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown">
                 <Grid x:Name="btnExitBackground" Background="Red" Opacity="0"/>
                 <Canvas x:Name="CExit" Width="24" Height="24">
                     <Path Fill="White" Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
                 </Canvas>
             </Grid>
-            <Grid.Effect>
-                <DropShadowEffect Color="Black" Direction="270" Opacity="0.5" BlurRadius="10" ShadowDepth="3" />
-            </Grid.Effect>
         </Grid>
 
-        <Grid x:Name="gridMenu" HorizontalAlignment="Left" Height="620" Margin="1,0,0,0" VerticalAlignment="Top" Width="199" Background="#FF094272">
-            <Grid x:Name="SongList" HorizontalAlignment="Left" Height="60" Margin="0,90,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
-            <Grid x:Name="AllSong" HorizontalAlignment="Left" Height="60" Margin="0,175,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
-            <Grid x:Name="Setting" HorizontalAlignment="Left" Height="60" Margin="0,260,0,0" VerticalAlignment="Top" Width="199" Background="#7A0097FF"/>
-            <Viewbox x:Name="logoFeatherPlayer" Margin="0,-34,0,479">
+        <Grid x:Name="gridMenu" HorizontalAlignment="Left" Height="699" VerticalAlignment="Top" Width="200">
+            <Viewbox x:Name="logoFeatherPlayer" Margin="0,-34,0,564">
                 <Canvas Width="266" Height="278" Canvas.Left="0" Canvas.Top="0">
                     <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path83" Fill="#FFFFFF">
                         <Path.Data>
@@ -437,6 +426,7 @@
                     </Path>
                 </Canvas>
             </Viewbox>
+            <Label x:Name="labBtnSongList" Content="歌单列表" HorizontalAlignment="Left" Height="40" Margin="45,135,0,0" VerticalAlignment="Top" Width="100" Foreground="White" FontSize="22" FontStretch="SemiExpanded" FontWeight="Medium" FontFamily="Microsoft YaHei Light"/>
         </Grid>
 
     </Grid>

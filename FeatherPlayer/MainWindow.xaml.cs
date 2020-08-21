@@ -36,7 +36,7 @@ namespace FeatherPlayer
             continuedata = Geometry.Parse(continuedatastr);
             pausedata = Geometry.Parse(pausestr);
 
-            player = new FeatherPlayer.MusicPlayer();
+            player = new MusicPlayer();
             player.PlaybackStopped += Player_PlaybackStopped;
               
             InitializeComponent();
@@ -185,6 +185,11 @@ namespace FeatherPlayer
         {
             try { DragMove(); }
             catch { }
+        }
+
+        private void frmPages_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
         }
 
         private void Player_PlaybackStopped(object sender, PlaybackStoppedEventArgs e)
