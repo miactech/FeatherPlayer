@@ -71,10 +71,7 @@ namespace FeatherPlayer
                 CleanupPlayback();
 
                 _waveSource =
-                    CodecFactory.Instance.GetCodec(filename)
-                        .ToSampleSource()
-                        .ToMono()
-                        .ToWaveSource();
+                    CodecFactory.Instance.GetCodec(filename);
                 _soundOut = new WasapiOut() { Latency = 100, Device = device };
                 _soundOut.Initialize(_waveSource);
                 if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
