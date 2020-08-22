@@ -76,6 +76,7 @@
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="sliMove.cs" />
     <Compile Include="XmlStruct.cs" />
     <Page Include="fButton.xaml">
       <SubType>Designer</SubType>

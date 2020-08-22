@@ -128,6 +128,7 @@ namespace FeatherPlayer
         //int Songtime;//歌曲当前长度 timer要用
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //sliSong.IsEnabled = true;
             string fileName;          
             //int stream;
             switch (player.PlaybackState)
@@ -155,7 +156,7 @@ namespace FeatherPlayer
                         player.Open(fileName, device);
                         sliSong.Maximum = player.Length.TotalMilliseconds;
                         player.Play();
-                        player.Volume = 10;
+                        player.Volume = 50;
                         PlayStop.Data = pausedata;
                         //改变播放进度
                         timer = new DispatcherTimer();
@@ -197,7 +198,7 @@ namespace FeatherPlayer
 
         private void sliSong_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            isSliChanged = false;
+            isSliChanged = false; //isSliChanged为是否能改变滑条的判断bool
         }
 
         private void sliSong_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -205,7 +206,26 @@ namespace FeatherPlayer
             isSliChanged = true;
             double perc = sliSong.Value / sliSong.Maximum;
             TimeSpan position = TimeSpan.FromMilliseconds(player.Length.TotalMilliseconds * perc);
-            player.Position = position;
+            player.Position = position; //更改位置
+        }
+
+        private void sliSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //每次检测是否播放结束
+        {
+            if(sliSong.Value == sliSong.Maximum)
+            {
+                sliSong.Value = 0;
+                PlayStop.Data = pausedata;
+            }
+        }
+
+        private void sliSong_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            sliMove.FloatSlider(sliSong, 5000);
         }
 
         private void Player_PlaybackStopped(object sender, PlaybackStoppedEventArgs e)
