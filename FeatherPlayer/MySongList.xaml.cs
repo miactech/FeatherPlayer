@@ -131,7 +131,5 @@ namespace FeatherPlayer
             btnOpacity.FloatElement(SongList1, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongList1, 0.8, 0.9, 500);
         }
-
-
     }
 }

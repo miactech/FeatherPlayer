@@ -1,21 +1,15 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using CSCore;
 using CSCore.Codecs;
 using CSCore.CoreAudioAPI;
 using CSCore.SoundOut;
+using System.Windows.Threading;
 
 namespace FeatherPlayer
 {
@@ -24,9 +18,6 @@ namespace FeatherPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
-        playStatus playstatus = playStatus.Unloaded;
         Geometry pausedata, continuedata;//initialize the icons
         MusicPlayer player;
         public MainWindow()
@@ -42,8 +33,6 @@ namespace FeatherPlayer
             InitializeComponent();
             //playGrid.Visibility = Visibility.Hidden;
         }
-
-
 
         public enum playStatus
         {
@@ -134,10 +123,11 @@ namespace FeatherPlayer
             btnOpacity.FloatElement(SongPic, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
         }
-
+        DispatcherTimer timer = null;
+        int Songtime;//歌曲当前长度 timer要用
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            string fileName;
+            string fileName;          
             //int stream;
             switch (player.PlaybackState)
             {
@@ -149,40 +139,47 @@ namespace FeatherPlayer
                         Title = "No music loaded. Please select a valid audio file.",
                         Filter = CodecFactory.SupportedFilesFilterEn //"FreeLosslessAudioCodec|*.flac|MPEG-3|*.mp3|Wave|*.wav"
                     };
-
+                    
                     if (opfflac.ShowDialog() == true)
                     {
+                        string strFileName = opfflac.FileName;
+                        string dirName = Path.GetDirectoryName(strFileName);
+                        string SongName = Path.GetFileName(strFileName);//获得歌曲名称
+                        FileInfo fInfo = new FileInfo(strFileName);                     
                         var mmdeviceEnumerator = new MMDeviceEnumerator();
-                        MMDevice device = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-                        
-                        fileName = opfflac.FileName;
-                        
+                        MMDevice device = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);                       
+                        fileName = opfflac.FileName;                  
                         player.Open(fileName, device);
+                        sliSong.Maximum = player.Length.Milliseconds;
+                        Songtime = player.Position.Milliseconds;
                         player.Play();
                         player.Volume = 10;
                         PlayStop.Data = pausedata;
-                        //第一个参数是文件名，
-                        //第二个参数是文件流开始位置，
-                        //第三个是文件流长度 0为使用文件整个长度，
-                        //最后一个是流的创建模式
-                        //stream = Bass.BASS_StreamCreateFile(fileName, 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);
-                        //Bass.BASS_ChannelPlay(stream, true); //开始播放
+                        timer = new DispatcherTimer();
+                        timer.Interval = TimeSpan.FromMilliseconds(1000);
+                        timer.Tick += new EventHandler(timer_tick);
+                        timer.Start();
                     }
                     break;
-                case PlaybackState.Playing:
+                case PlaybackState.Playing: //点击暂停时
                     PlayStop.Data = continuedata;
                     player.Pause();
                     break;
-                case PlaybackState.Paused:
+                case PlaybackState.Paused: //点击继续时
                     PlayStop.Data = pausedata;
                     player.Play();
                     break;
             }
         }
+        private void timer_tick(object sender, EventArgs e) //timer同步进度条
+        {
+            sliSong.Value = Songtime;
+        }
         /// <summary>
         /// move window
         /// </summary>
         /// <param name="sender"></param>
+        /// 
         /// <param name="e"></param>
         private void gridTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
