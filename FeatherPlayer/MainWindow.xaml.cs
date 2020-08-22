@@ -124,7 +124,7 @@ namespace FeatherPlayer
             btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
         }
         DispatcherTimer timer = null;
-        int Songtime;//歌曲当前长度 timer要用
+        //int Songtime;//歌曲当前长度 timer要用
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             string fileName;          
@@ -134,30 +134,35 @@ namespace FeatherPlayer
                 case PlaybackState.Stopped:
                     //nothing loaded
 
-                    OpenFileDialog opfflac = new OpenFileDialog()
+                    OpenFileDialog opFile = new OpenFileDialog()
                     {
                         Title = "No music loaded. Please select a valid audio file.",
-                        Filter = CodecFactory.SupportedFilesFilterEn //"FreeLosslessAudioCodec|*.flac|MPEG-3|*.mp3|Wave|*.wav"
+                        Filter = CodecFactory.SupportedFilesFilterEn
                     };
                     
-                    if (opfflac.ShowDialog() == true)
+                    if (opFile.ShowDialog() == true)
                     {
-                        string strFileName = opfflac.FileName;
+                        string strFileName = opFile.FileName;
                         string dirName = Path.GetDirectoryName(strFileName);
                         string SongName = Path.GetFileName(strFileName);//获得歌曲名称
-                        FileInfo fInfo = new FileInfo(strFileName);                     
+                        FileInfo fInfo = new FileInfo(strFileName);
+                        //获取默认音频输出设备
                         var mmdeviceEnumerator = new MMDeviceEnumerator();
                         MMDevice device = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);                       
-                        fileName = opfflac.FileName;                  
+                        fileName = opFile.FileName;
+                        //打开文件
                         player.Open(fileName, device);
-                        sliSong.Maximum = player.Length.Milliseconds;
-                        Songtime = player.Position.Milliseconds;
+                        sliSong.Maximum = player.Length.TotalMilliseconds;
                         player.Play();
                         player.Volume = 10;
                         PlayStop.Data = pausedata;
+                        //改变播放进度
                         timer = new DispatcherTimer();
-                        timer.Interval = TimeSpan.FromMilliseconds(1000);
-                        timer.Tick += new EventHandler(timer_tick);
+                        timer.Interval = TimeSpan.FromMilliseconds(500);
+                        timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
+                            sliSong.Value = player.Position.TotalMilliseconds;
+                            lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
+                        });
                         timer.Start();
                     }
                     break;
@@ -171,10 +176,7 @@ namespace FeatherPlayer
                     break;
             }
         }
-        private void timer_tick(object sender, EventArgs e) //timer同步进度条
-        {
-            sliSong.Value = Songtime;
-        }
+
         /// <summary>
         /// move window
         /// </summary>

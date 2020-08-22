@@ -285,7 +285,7 @@
             <Grid x:Name="SongPic" HorizontalAlignment="Left" Margin="26,16,0,16" Width="47" Background="White" MouseEnter="SongPic_MouseEnter" MouseLeave="SongPic_MouseLeave"/>
             <Label x:Name="lblSinger" Content="Singer" HorizontalAlignment="Left" Margin="91,40,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B"/>
             <Slider x:Name="sliSong" HorizontalAlignment="Left" Margin="413,45,0,0" VerticalAlignment="Top" Width="602" Style="{DynamicResource FeatherSlider}"/>
-            <Label x:Name="lblSongTime" Content="00:00 / 00:00" HorizontalAlignment="Left" Margin="413,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+            <Label x:Name="lblPosition" Content="00:00 / 00:00" HorizontalAlignment="Left" Margin="413,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
             <Label x:Name="lblSongInformation" Content="48kHz / 24bit" HorizontalAlignment="Left" Margin="915,14,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
             <Grid x:Name="btnPlayStop" HorizontalAlignment="Left" Height="47" Margin="294,16,0,0" VerticalAlignment="Top" Width="47" MouseEnter="PlayStop_MouseEnter" MouseLeave="PlayStop_MouseLeave" MouseLeftButtonDown="PlayStop_MouseLeftButtonDown">
                 <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912" Margin="-27,0,0,0" />
