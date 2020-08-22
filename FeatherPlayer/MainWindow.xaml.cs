@@ -125,7 +125,7 @@ namespace FeatherPlayer
             btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
         }
         DispatcherTimer timer = null;
-        //int Songtime;//歌曲当前长度 timer要用
+        int Songtime;//歌曲当前长度 timer要用
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //sliSong.IsEnabled = true;
@@ -211,11 +211,7 @@ namespace FeatherPlayer
 
         private void sliSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //每次检测是否播放结束
         {
-            if(sliSong.Value == sliSong.Maximum)
-            {
-                sliSong.Value = 0;
-                PlayStop.Data = pausedata;
-            }
+
         }
 
         private void sliSong_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
