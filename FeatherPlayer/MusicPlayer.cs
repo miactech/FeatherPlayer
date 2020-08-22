@@ -13,7 +13,9 @@ namespace FeatherPlayer
             private IWaveSource _waveSource;
 
             public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
-
+        /// <summary>
+        /// 播放状态。
+        /// </summary>
             public PlaybackState PlaybackState
             {
                 get
@@ -23,7 +25,9 @@ namespace FeatherPlayer
                     return PlaybackState.Stopped;
                 }
             }
-
+        /// <summary>
+        /// 获取当前播放位置。
+        /// </summary>
             public TimeSpan Position
             {
                 get
@@ -38,7 +42,9 @@ namespace FeatherPlayer
                         _waveSource.SetPosition(value);
                 }
             }
-
+        /// <summary>
+        /// 获取歌曲总长度。
+        /// </summary>
             public TimeSpan Length
             {
                 get
@@ -48,7 +54,9 @@ namespace FeatherPlayer
                     return TimeSpan.Zero;
                 }
             }
-
+        /// <summary>
+        /// 设置音量。 (0~100)
+        /// </summary>
             public int Volume
             {
                 get
@@ -65,7 +73,11 @@ namespace FeatherPlayer
                     }
                 }
             }
-
+        /// <summary>
+        /// 打开一个音频文件。
+        /// </summary>
+        /// <param name="filename">音频文件名</param>
+        /// <param name="device">要使用的音频设备</param>
             public void Open(string filename, MMDevice device)
             {
                 CleanupPlayback();
@@ -76,19 +88,25 @@ namespace FeatherPlayer
                 _soundOut.Initialize(_waveSource);
                 if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
             }
-
+        /// <summary>
+        /// 播放。
+        /// </summary>
             public void Play()
             {
                 if (_soundOut != null)
                     _soundOut.Play();
             }
-
+        /// <summary>
+        /// 暂停。
+        /// </summary>
             public void Pause()
             {
                 if (_soundOut != null)
                     _soundOut.Pause();
             }
-
+        /// <summary>
+        /// 停止播放。
+        /// </summary>
             public void Stop()
             {
                 if (_soundOut != null)
