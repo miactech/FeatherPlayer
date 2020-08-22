@@ -19,6 +19,7 @@ namespace FeatherPlayer
     public partial class MainWindow : Window
     {
         Geometry pausedata, continuedata;//initialize the icons
+        bool isSliChanged = true;
         MusicPlayer player;
         public MainWindow()
         {
@@ -160,7 +161,7 @@ namespace FeatherPlayer
                         timer = new DispatcherTimer();
                         timer.Interval = TimeSpan.FromMilliseconds(500);
                         timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
-                            sliSong.Value = player.Position.TotalMilliseconds;
+                            if (isSliChanged) { sliSong.Value = player.Position.TotalMilliseconds; }
                             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
                         });
                         timer.Start();
@@ -192,6 +193,19 @@ namespace FeatherPlayer
         private void frmPages_MouseDown(object sender, MouseButtonEventArgs e)
         {
             
+        }
+
+        private void sliSong_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            isSliChanged = false;
+        }
+
+        private void sliSong_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isSliChanged = true;
+            double perc = sliSong.Value / sliSong.Maximum;
+            TimeSpan position = TimeSpan.FromMilliseconds(player.Length.TotalMilliseconds * perc);
+            player.Position = position;
         }
 
         private void Player_PlaybackStopped(object sender, PlaybackStoppedEventArgs e)
