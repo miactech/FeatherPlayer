@@ -125,7 +125,6 @@ namespace FeatherPlayer
             btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
         }
         DispatcherTimer timer = null;
-        int Songtime;//歌曲当前长度 timer要用
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //sliSong.IsEnabled = true;
@@ -164,6 +163,13 @@ namespace FeatherPlayer
                         timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
                             if (isSliChanged) { sliSong.Value = player.Position.TotalMilliseconds; }
                             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
+                            //检测是否播放结束
+                            if (sliSong.Value == sliSong.Maximum)
+                            {
+                                timer.Stop();
+                                sliSong.Value = 0;
+                                lblPosition.Content = "00:00 / 00:00";
+                            }
                         });
                         timer.Start();
                     }
@@ -209,9 +215,9 @@ namespace FeatherPlayer
             player.Position = position; //更改位置
         }
 
-        private void sliSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //每次检测是否播放结束
+        private void sliSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) 
         {
-
+            
         }
 
         private void sliSong_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
