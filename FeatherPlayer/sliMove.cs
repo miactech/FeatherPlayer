@@ -13,18 +13,27 @@ namespace FeatherPlayer
         /// <param name="time">持续时间</param>
         public static void FloatSlider(Slider sliname,int time)
         {
-            EasingFunctionBase EFAnimation = new PowerEase()
+            lock(sliname)
             {
-                EasingMode = EasingMode.EaseOut,
-                Power = 5
-            };
-            DoubleAnimation SliderAnimation = new DoubleAnimation()
-            {
-                From = sliname.Value,
-                To = sliname.Maximum,
-                EasingFunction = EFAnimation,
-                Duration = new TimeSpan(0, 0, 0, 0, time)  //动画播放时间
-            };
+                EasingFunctionBase easeFunction = new PowerEase()
+                {
+                    EasingMode = EasingMode.EaseOut,
+                    Power = 5
+                };
+                DoubleAnimation slianimation = new DoubleAnimation()
+                {
+                    To = sliname.Minimum,
+                    EasingFunction = easeFunction,                    //缓动函数
+                    Duration = new TimeSpan(0, 0, 0, 0, time)  //动画播放时间
+                };
+                EventHandler handler = null;
+                slianimation.Completed += handler = (s, e) =>
+                {
+                    slianimation.Completed -= handler;
+                    slianimation = null;
+                };
+                sliname.BeginAnimation(Slider.ValueProperty,slianimation);
+            }
         }
     }
 }
