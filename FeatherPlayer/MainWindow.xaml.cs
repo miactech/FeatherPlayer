@@ -231,7 +231,16 @@ namespace FeatherPlayer
 
         private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            sliMove.FloatSlider(sliSong, 5000);
+            sliMove.FloatSlider(sliSong, 700);
+            player.Stop();
+            timer.Stop();
+        }
+
+        private void Next_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            sliMove.FloatSlider(sliSong, 700);
+            player.Stop();
+            timer.Stop();
         }
 
         private void Player_PlaybackStopped(object sender, PlaybackStoppedEventArgs e)
