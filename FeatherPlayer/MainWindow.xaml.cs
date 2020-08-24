@@ -33,6 +33,7 @@ namespace FeatherPlayer
               
             InitializeComponent();
             //playGrid.Visibility = Visibility.Hidden;
+            //hhellonice i see you ok wait i will have dinner ok.
         }
 
         public enum playStatus
@@ -153,6 +154,8 @@ namespace FeatherPlayer
                         fileName = opFile.FileName;
                         //打开文件
                         player.Open(fileName, device);
+
+
                         sliSong.Maximum = player.Length.TotalMilliseconds;
                         player.Play();
                         player.Volume = 50;
@@ -160,6 +163,7 @@ namespace FeatherPlayer
                         //改变播放进度
                         timer = new DispatcherTimer();
                         timer.Interval = TimeSpan.FromMilliseconds(500);
+
                         timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
                             if (isSliChanged) { sliSong.Value = player.Position.TotalMilliseconds; }
                             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
