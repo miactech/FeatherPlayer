@@ -11,10 +11,12 @@ namespace FeatherPlayer
         {
             private ISoundOut _soundOut;
             private IWaveSource _waveSource;
-
+        /// <summary>
+        /// 播放停止事件
+        /// </summary>
             public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
         /// <summary>
-        /// 播放状态。
+        /// 当前播放状态。
         /// </summary>
             public PlaybackState PlaybackState
             {
@@ -59,6 +61,7 @@ namespace FeatherPlayer
         /// </summary>
             public int Volume
             {
+            
                 get
                 {
                     if (_soundOut != null)
@@ -88,6 +91,17 @@ namespace FeatherPlayer
                 _soundOut.Initialize(_waveSource);
                 if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
             }
+        /// <summary>
+        /// 获取默认音频输出设备。
+        /// </summary>
+        /// <returns>默认音频输出设备</returns>
+        public MMDevice GetDefaultWasapiOutDevice()
+        {
+            var mmdeviceEnumerator = new MMDeviceEnumerator();
+            return mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+        }
+
+
         /// <summary>
         /// 播放。
         /// </summary>
