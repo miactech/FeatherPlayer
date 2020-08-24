@@ -22,7 +22,9 @@ namespace FeatherPlayer
     public partial class MainWindow : Window
     {
         Geometry pausedata, continuedata;//initialize the icons
-        bool isSliderChanging = false;
+        bool isSliderChanging = false; //进度条是否可以变化
+        bool isLblPositionChanging = false; //位置文本是否可以改变
+        bool isVoice = false; //是否为调节音量状态
         MusicPlayer player;
         public MainWindow()
         {
@@ -39,7 +41,6 @@ namespace FeatherPlayer
 
             InitializeComponent();
             //playGrid.Visibility = Visibility.Hidden;
-            //hhellonice i see you ok wait i will have dinner ok.
         }
 
         public enum playStatus
@@ -51,6 +52,8 @@ namespace FeatherPlayer
 
         private void wndMain_Loaded(object sender, RoutedEventArgs e)
         {
+            player.Volume = 50;
+            sliVoice.Value = player.Volume;
             Blur.EnableBlur(this);
             //AudioInfo.wav.WavInfo wi = AudioInfo.wav.GetWavInfo("test.wav");
             //MessageBox.Show("Test");
@@ -76,7 +79,7 @@ namespace FeatherPlayer
             };
             btnExitBackground.BeginAnimation(OpacityProperty, daToTrans);
         }
-
+        #region
         private void btnExit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             btnExitBackground.Background = Brushes.OrangeRed;
@@ -86,51 +89,52 @@ namespace FeatherPlayer
 
         private void PlayStop_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(btnPlayStop, 0.9, 200);
+            btnOpacity.FloatElement(btnPlayStop, 1, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(btnPlayStop, 1, 0.9, 500);
         }
 
         private void PlayStop_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(btnPlayStop, 1, 200);
+            btnOpacity.FloatElement(btnPlayStop, 0.9, 1, 200);
             btnMove.ScaleEasingAnimationShow(btnPlayStop, 0.9, 1, 500);
         }
 
         private void Back_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(Back, 0.9, 200);
+            btnOpacity.FloatElement(Back, 1, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(Back, 1, 0.9, 500);
         }
 
         private void Back_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(Back, 1, 200);
+            btnOpacity.FloatElement(Back, 0.9, 1, 200);
             btnMove.ScaleEasingAnimationShow(Back, 0.9, 1, 500);
         }
 
         private void Next_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(Next, 0.9, 200);
+            btnOpacity.FloatElement(Next, 1, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(Next, 1, 0.9, 500);
         }
 
         private void Next_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(Next, 1, 200);
+            btnOpacity.FloatElement(Next, 0.9, 1, 200);
             btnMove.ScaleEasingAnimationShow(Next, 0.9, 1, 500);
         }
 
         private void SongPic_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(SongPic, 0.9, 200);
+            btnOpacity.FloatElement(SongPic, 1, 0.9, 200);
             btnMove.ScaleEasingAnimationShow(SongPic, 1, 0.9, 500);
         }
 
         private void SongPic_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(SongPic, 1, 200);
+            btnOpacity.FloatElement(SongPic, 0.9, 1, 200);
             btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
         }
+        #endregion
         DispatcherTimer timer = null;
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -158,6 +162,7 @@ namespace FeatherPlayer
                         Track track = new Track(fInfo.FullName,true);
                         lblTitle.Content = track.Title;
                         lblArtist.Content = track.Artist;
+                        
                         lblSongInformation.Content = string.Format("{0}kHz / {1}Bit",track.SampleRate / 1000,"16");
 
                         //获取默认音频输出设备
@@ -170,14 +175,19 @@ namespace FeatherPlayer
 
                         sliSong.Maximum = player.Length.TotalMilliseconds;
                         player.Play();
-                        player.Volume = 10;
+                        player.Volume = 50;
                         PlayStop.Data = pausedata;
                         //改变播放进度
 
 
                         timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
                             if (!isSliderChanging) { sliSong.Value = player.Position.TotalMilliseconds; }
-                            lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
+                            if (isLblPositionChanging) { lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length); }
+                            if (isVoice)
+                            {
+                                player.Volume = (int)sliVoice.Value;
+                                lblVoice.Content = player.Volume;
+                            }
                         });
 
                         player.PlaybackStopped += new EventHandler<PlaybackStoppedEventArgs>((object s2,PlaybackStoppedEventArgs pse) => {
@@ -233,19 +243,34 @@ namespace FeatherPlayer
 
         private void sliSong_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //右键切换为音量条效果
+            isVoice = true;
+            sliVoice.Value = player.Volume; //同步音量
+            isSliderChanging = false;
+            isLblPositionChanging = false;
+            sliMove.FloatSlider(sliSong, 0, 500);
+            Delay.DelayTime(400);
+            sliVoice.Visibility = Visibility.Visible;
+            sliVoice.Value = 0;
+            lblVoice.Content = player.Volume;
+            lblPosition.Visibility = Visibility.Hidden;
+            lblVoice.Visibility = Visibility.Visible;
+            sliMove.FloatSlider(sliVoice, player.Volume, 500);
+            sliSong.Visibility = Visibility.Hidden;
+
 
         }
 
         private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            sliMove.FloatSlider(sliSong, 700);
+            sliMove.FloatSlider(sliSong,0, 700);
             player.Stop();
             timer.Stop();
         }
 
         private void Next_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            sliMove.FloatSlider(sliSong, 700);
+            sliMove.FloatSlider(sliSong,0, 700);
             player.Stop();
             timer.Stop();
         }

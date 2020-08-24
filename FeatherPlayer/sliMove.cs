@@ -10,8 +10,9 @@ namespace FeatherPlayer
         /// 滑条缓变动画
         /// </summary>
         /// <param name="sliname">滑条名称</param>
+        /// <param name="to">目标值</param>
         /// <param name="time">持续时间</param>
-        public static void FloatSlider(Slider sliname,int time)
+        public static void FloatSlider(Slider sliname,double to ,int time)
         {
             lock(sliname)
             {
@@ -22,8 +23,8 @@ namespace FeatherPlayer
                 };
                 DoubleAnimation slianimation = new DoubleAnimation()
                 {
-                    To = sliname.Minimum,
-                    EasingFunction = easeFunction,                    //缓动函数
+                    To = to,
+                    EasingFunction = easeFunction,             //缓动函数
                     Duration = new TimeSpan(0, 0, 0, 0, time)  //动画播放时间
                 };
                 EventHandler handler = null;

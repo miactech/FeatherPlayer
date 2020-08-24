@@ -290,6 +290,8 @@
             <Grid x:Name="btnPlayStop" HorizontalAlignment="Left" Height="47" Margin="267,16,0,0" VerticalAlignment="Top" Width="47" MouseEnter="PlayStop_MouseEnter" MouseLeave="PlayStop_MouseLeave" MouseLeftButtonDown="PlayStop_MouseLeftButtonDown">
                 <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912"  />
             </Grid>
+            <Slider x:Name="sliVoice" HorizontalAlignment="Left" Margin="413,45,0,0" VerticalAlignment="Top" Width="652" Style="{DynamicResource FeatherSlider}" PreviewMouseLeftButtonDown="sliSong_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="sliSong_PreviewMouseLeftButtonUp" ValueChanged="sliSong_ValueChanged" PreviewMouseRightButtonUp="sliSong_PreviewMouseRightButtonUp" Visibility="Hidden" Maximum="100"/>
+            <Label x:Name="lblVoice" Content="50" HorizontalAlignment="Left" Margin="413,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Visibility="Hidden"/>
         </Grid>
         <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="200,0,0,0" MouseLeftButtonDown="gridTitle_MouseLeftButtonDown" Background="#FF0F5789">
             <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown">
