@@ -10,6 +10,9 @@ using CSCore.Codecs;
 using CSCore.CoreAudioAPI;
 using CSCore.SoundOut;
 using System.Windows.Threading;
+using ATL.AudioData;
+using ATL;
+using System.Diagnostics;
 
 namespace FeatherPlayer
 {
@@ -19,7 +22,7 @@ namespace FeatherPlayer
     public partial class MainWindow : Window
     {
         Geometry pausedata, continuedata;//initialize the icons
-        bool isSliChanged = true;
+        bool isSliderChanging = false;
         MusicPlayer player;
         public MainWindow()
         {
@@ -30,7 +33,10 @@ namespace FeatherPlayer
 
             player = new MusicPlayer();
             player.PlaybackStopped += Player_PlaybackStopped;
-              
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+
             InitializeComponent();
             //playGrid.Visibility = Visibility.Hidden;
             //hhellonice i see you ok wait i will have dinner ok.
@@ -146,8 +152,14 @@ namespace FeatherPlayer
                     {
                         string strFileName = opFile.FileName;
                         string dirName = Path.GetDirectoryName(strFileName);
-                        string SongName = Path.GetFileName(strFileName);//获得歌曲名称
+                        //string SongName = Path.GetFileName(strFileName);//获得歌曲名称
                         FileInfo fInfo = new FileInfo(strFileName);
+
+                        Track track = new Track(fInfo.FullName,true);
+                        lblTitle.Content = track.Title;
+                        lblArtist.Content = track.Artist;
+                        lblSongInformation.Content = string.Format("{0}kHz / {1}Bit",track.SampleRate / 1000,"16");
+
                         //获取默认音频输出设备
                         var mmdeviceEnumerator = new MMDeviceEnumerator();
                         MMDevice device = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);                       
@@ -158,22 +170,18 @@ namespace FeatherPlayer
 
                         sliSong.Maximum = player.Length.TotalMilliseconds;
                         player.Play();
-                        player.Volume = 50;
+                        player.Volume = 10;
                         PlayStop.Data = pausedata;
                         //改变播放进度
-                        timer = new DispatcherTimer();
-                        timer.Interval = TimeSpan.FromMilliseconds(500);
+
 
                         timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
-                            if (isSliChanged) { sliSong.Value = player.Position.TotalMilliseconds; }
+                            if (!isSliderChanging) { sliSong.Value = player.Position.TotalMilliseconds; }
                             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
-                            //检测是否播放结束
-                            if (sliSong.Value == sliSong.Maximum)
-                            {
-                                timer.Stop();
-                                sliSong.Value = 0;
-                                lblPosition.Content = "00:00 / 00:00";
-                            }
+                        });
+
+                        player.PlaybackStopped += new EventHandler<PlaybackStoppedEventArgs>((object s2,PlaybackStoppedEventArgs pse) => {
+                            timer.Stop();
                         });
                         timer.Start();
                     }
@@ -192,9 +200,6 @@ namespace FeatherPlayer
         /// <summary>
         /// move window
         /// </summary>
-        /// <param name="sender"></param>
-        /// 
-        /// <param name="e"></param>
         private void gridTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try { DragMove(); }
@@ -208,15 +213,17 @@ namespace FeatherPlayer
 
         private void sliSong_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            isSliChanged = false; //isSliChanged为是否能改变滑条的判断bool
+            isSliderChanging = true; //isSliChanged为是否能改变滑条的判断bool
         }
 
         private void sliSong_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            isSliChanged = true;
-            double perc = sliSong.Value / sliSong.Maximum;
-            TimeSpan position = TimeSpan.FromMilliseconds(player.Length.TotalMilliseconds * perc);
-            player.Position = position; //更改位置
+            isSliderChanging = false;
+            TimeSpan tsNewValue = TimeSpan.FromMilliseconds(sliSong.Value);
+            //double perc = sliSong.Value / sliSong.Maximum;
+            //TimeSpan position = TimeSpan.FromMilliseconds(player.Length.TotalMilliseconds * perc);
+            player.Position = tsNewValue; //更改位置
+            lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
         }
 
         private void sliSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) 
@@ -242,10 +249,15 @@ namespace FeatherPlayer
             player.Stop();
             timer.Stop();
         }
-
+        /// <summary>
+        /// 播放已停止
+        /// </summary>
         private void Player_PlaybackStopped(object sender, PlaybackStoppedEventArgs e)
         {
             PlayStop.Data = continuedata;
+            timer.Stop();
+            //sliSong.Value = 0;
+            //lblPosition.Content = "00:00 / 00:00";
         }
     }
 }
