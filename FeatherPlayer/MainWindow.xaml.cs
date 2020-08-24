@@ -19,6 +19,7 @@ namespace FeatherPlayer
     public partial class MainWindow : Window
     {
         Geometry pausedata, continuedata;//initialize the icons
+        bool isSliChanged = true;
         MusicPlayer player;
         public MainWindow()
         {
@@ -125,9 +126,9 @@ namespace FeatherPlayer
             btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
         }
         DispatcherTimer timer = null;
-        //int Songtime;//歌曲当前长度 timer要用
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //sliSong.IsEnabled = true;
             string fileName;          
             //int stream;
             switch (player.PlaybackState)
@@ -157,15 +158,22 @@ namespace FeatherPlayer
 
                         sliSong.Maximum = player.Length.TotalMilliseconds;
                         player.Play();
-                        player.Volume = 10;
+                        player.Volume = 50;
                         PlayStop.Data = pausedata;
                         //改变播放进度
                         timer = new DispatcherTimer();
                         timer.Interval = TimeSpan.FromMilliseconds(500);
 
                         timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
-                            sliSong.Value = player.Position.TotalMilliseconds;
+                            if (isSliChanged) { sliSong.Value = player.Position.TotalMilliseconds; }
                             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
+                            //检测是否播放结束
+                            if (sliSong.Value == sliSong.Maximum)
+                            {
+                                timer.Stop();
+                                sliSong.Value = 0;
+                                lblPosition.Content = "00:00 / 00:00";
+                            }
                         });
                         timer.Start();
                     }
@@ -196,6 +204,34 @@ namespace FeatherPlayer
         private void frmPages_MouseDown(object sender, MouseButtonEventArgs e)
         {
             
+        }
+
+        private void sliSong_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            isSliChanged = false; //isSliChanged为是否能改变滑条的判断bool
+        }
+
+        private void sliSong_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isSliChanged = true;
+            double perc = sliSong.Value / sliSong.Maximum;
+            TimeSpan position = TimeSpan.FromMilliseconds(player.Length.TotalMilliseconds * perc);
+            player.Position = position; //更改位置
+        }
+
+        private void sliSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) 
+        {
+            
+        }
+
+        private void sliSong_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            sliMove.FloatSlider(sliSong, 5000);
         }
 
         private void Player_PlaybackStopped(object sender, PlaybackStoppedEventArgs e)
