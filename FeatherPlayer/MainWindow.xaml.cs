@@ -13,6 +13,8 @@ using System.Windows.Threading;
 using ATL.AudioData;
 using ATL;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace FeatherPlayer
 {
@@ -79,7 +81,7 @@ namespace FeatherPlayer
 
         private void btnExit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            btnExitBackground.Background = Brushes.OrangeRed;
+            btnExitBackground.Background = System.Windows.Media.Brushes.OrangeRed;
             player.Stop();
             Application.Current.Shutdown();
         }      
@@ -122,14 +124,14 @@ namespace FeatherPlayer
 
         private void SongPic_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(SongPic, 0.9, 200);
-            btnMove.ScaleEasingAnimationShow(SongPic, 1, 0.9, 500);
+            btnOpacity.FloatElement(gridCover, 0.9, 200);
+            btnMove.ScaleEasingAnimationShow(gridCover, 1, 0.9, 500);
         }
 
         private void SongPic_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnOpacity.FloatElement(SongPic, 1, 200);
-            btnMove.ScaleEasingAnimationShow(SongPic, 0.9, 1, 500);
+            btnOpacity.FloatElement(gridCover, 1, 200);
+            btnMove.ScaleEasingAnimationShow(gridCover, 0.9, 1, 500);
         }
         DispatcherTimer timer = null;
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -155,10 +157,15 @@ namespace FeatherPlayer
                         //string SongName = Path.GetFileName(strFileName);//获得歌曲名称
                         FileInfo fInfo = new FileInfo(strFileName);
 
+                        //获取歌曲信息并显示
                         Track track = new Track(fInfo.FullName,true);
-                        lblTitle.Content = track.Title;
-                        lblArtist.Content = track.Artist;
+                        tbTitle.Text = track.Title;
+                        tbArtist.Text = track.Artist;
                         lblSongInformation.Content = string.Format("{0}kHz / {1}Bit",track.SampleRate / 1000,"16");
+                        MemoryStream ms = new MemoryStream(track.EmbeddedPictures[0].PictureData);
+                        Image.GetThumbnailImageAbort callb = new Image.GetThumbnailImageAbort(() => { return false; });
+                        Image cover = Image.FromStream(ms).GetThumbnailImage(47,47,callb,IntPtr.Zero);
+                        gridCover.Background = new System.Windows.Media.ImageBrush(ToImageSource(cover));
 
                         //获取默认音频输出设备
                         var mmdeviceEnumerator = new MMDeviceEnumerator();
@@ -196,6 +203,24 @@ namespace FeatherPlayer
                     break;
             }
         }
+
+        private ImageSource ToImageSource(Image image )
+        {
+            using (var ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Bmp);
+                ms.Seek(0, SeekOrigin.Begin);
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = ms;
+                bitmapImage.EndInit();
+
+                return bitmapImage;
+            }
+        }
+
 
         /// <summary>
         /// move window
