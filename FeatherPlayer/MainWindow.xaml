@@ -286,7 +286,7 @@
             <Label x:Name="lblPosition" Content="00:00 / 00:00" HorizontalAlignment="Left" Margin="413,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
             <Label x:Name="lblSongInformation" Content="48kHz / 24bit" HorizontalAlignment="Left" Margin="965,14,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
             <Grid x:Name="btnPlayStop" HorizontalAlignment="Left" Height="47" Margin="267,16,0,0" VerticalAlignment="Top" Width="47" MouseEnter="PlayStop_MouseEnter" MouseLeave="PlayStop_MouseLeave" MouseLeftButtonDown="PlayStop_MouseLeftButtonDown">
-                <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912"  />
+                <Path x:Name="PlayStop" Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" Fill="White" Visibility="Visible"  Stretch="Fill" HorizontalAlignment="Left" Width="46.912" StrokeThickness="0"  />
             </Grid>
 
             <TextBlock x:Name="tbArtist" Text="Artist" HorizontalAlignment="Left" Margin="91,40,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B" Width="109" Height="17" TextTrimming="CharacterEllipsis" />

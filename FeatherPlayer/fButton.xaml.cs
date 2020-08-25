@@ -25,29 +25,81 @@ namespace FeatherPlayer
         {
             InitializeComponent();
         }
+
+        private double _mouseEnterOpacity = 0.9;
+        private double _mouseDownOpacity = 0.8;
+        private double _mouseEnterScale = 0.96;
+        private double _mouseDownScale = 0.93;
+
+        /// <summary>
+        /// 在鼠标移动至按钮上时 透明度的变化值
+        /// <para>默认值：0.9</para>
+        /// </summary>
+        public double fMouseEnterOpacity
+        {
+            get { return _mouseEnterOpacity; }
+            set { _mouseEnterOpacity = value; }
+        }
+
+        /// <summary>
+        /// 在鼠标左键按在按钮上时 透明度的变化值
+        /// <para>默认值：0.8</para>
+        /// </summary>
+        public double fMouseDownOpacity
+        {
+            get { return _mouseDownOpacity; }
+            set { _mouseDownOpacity = value; }
+        }
+        /// <summary>
+        /// 在鼠标移动至按钮上时的缩放程度
+        /// <para>默认值：0.96</para>
+        /// </summary>
+        public double fMouseEnterScale
+        {
+            get { return _mouseEnterScale; }
+            set { _mouseEnterScale = value; }
+        }
+        /// <summary>
+        /// 在鼠标左键按在按钮上时的缩放程度
+        /// <para>默认值：0.93</para>
+        /// </summary>
+        public double fMouseDownScale
+        {
+            get { return _mouseDownScale; }
+            set { _mouseDownScale = value; }
+        }
+        /// <summary>
+        /// 设置该控件的背景
+        /// </summary>
+        public Brush fBackground
+        {
+            //get { return button.Background; }
+            set { button.Background = value; }
+        }
+
+
         private void b_MouseEnter(object sender, MouseEventArgs e)
         {
-            OpacityAnimation(button, 0.9, 200);
-            ScaleEasingAnimationShow(button, 1, 0.96, 300);
+            OpacityAnimation(button, _mouseEnterOpacity, 200);
+            ScaleEasingAnimationShow(button, 1, _mouseEnterScale, 300);
         }
 
         private void b_MouseLeave(object sender, MouseEventArgs e)
         {
             OpacityAnimation(button, 1, 200);
-            ScaleEasingAnimationShow(button, 0.96, 1, 300);
+            ScaleEasingAnimationShow(button, _mouseEnterScale, 1, 300);
         }
-
 
         private void b_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            OpacityAnimation(button, 0.8, 100);
-            ScaleEasingAnimationShow(button, 0.96, 0.93, 150);//500
+            OpacityAnimation(button, _mouseDownOpacity, 100);
+            ScaleEasingAnimationShow(button, _mouseEnterScale, _mouseDownScale, 150);//500
         }
 
         private void b_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            OpacityAnimation(button, 0.9, 100);
-            ScaleEasingAnimationShow(button, 0.93, 0.96, 150);
+            OpacityAnimation(button, _mouseEnterOpacity, 100);
+            ScaleEasingAnimationShow(button, _mouseDownScale, _mouseEnterScale, 150);
         }
 
         /// <summary>
@@ -55,7 +107,7 @@ namespace FeatherPlayer
         /// </summary>
         /// <param name="elem">控件名</param>
         /// <param name="to">目标透明度</param>
-        /// <param name="time">时间</param>
+        /// <param name="time">动画时间</param>
         public static void OpacityAnimation(UIElement elem, double to, int time)
         {
             lock (elem)

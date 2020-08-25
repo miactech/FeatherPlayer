@@ -67,9 +67,6 @@
     </ApplicationDefinition>
     <Compile Include="AudioInfo.cs" />
     <Compile Include="btnMove.cs" />
-    <Compile Include="C:\Users\Administrator\Desktop\btnOpacity.cs">
-      <Link>btnOpacity.cs</Link>
-    </Compile>
     <Compile Include="Delay.cs" />
     <Compile Include="fButton.xaml.cs">
       <DependentUpon>fButton.xaml</DependentUpon>

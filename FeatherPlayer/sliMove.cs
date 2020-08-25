@@ -14,8 +14,6 @@ namespace FeatherPlayer
         /// <param name="time">持续时间</param>
         public static void FloatSlider(Slider sliname,double to ,int time)
         {
-            lock(sliname)
-            {
                 EasingFunctionBase easeFunction = new PowerEase()
                 {
                     EasingMode = EasingMode.EaseOut,
@@ -34,7 +32,6 @@ namespace FeatherPlayer
                     slianimation = null;
                 };
                 sliname.BeginAnimation(Slider.ValueProperty,slianimation);
-            }
         }
     }
 }
