@@ -15,7 +15,7 @@
         <local:fButton x:Name="SongList1" HorizontalAlignment="Left" Height="195" Margin="70,80,0,0" VerticalAlignment="Top" Width="195"/>
         <local:fButton x:Name="SongList2" Margin="320,80,0,0" HorizontalAlignment="Left" Width="195" Height="195" VerticalAlignment="Top"/>
         <local:fButton x:Name="SongList3" Height="195" Margin="560,80,333,0" VerticalAlignment="Top"/>
-        <local:fButton x:Name="SongList4" Height="195" Margin="800,80,93,0" VerticalAlignment="Top"/>
+        <local:fButton x:Name="SongList4" Height="195" Margin="800,80,93,0" VerticalAlignment="Top" />
         <local:fButton x:Name="SongList5" Height="195" Margin="70,330,823,0" VerticalAlignment="Top"/>
         <local:fButton x:Name="SongList6" Height="195" Margin="320,330,573,0" VerticalAlignment="Top"/>
         <local:fButton x:Name="SongList7" Height="195" Margin="560,330,333,0" VerticalAlignment="Top" Width="195"/>

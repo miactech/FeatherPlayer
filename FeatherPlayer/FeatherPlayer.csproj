@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>FeatherPlayer.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ATL, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\z440.atl.core.3.7.0\lib\net45\ATL.dll</HintPath>
@@ -65,26 +68,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AudioInfo.cs" />
-    <Compile Include="btnMove.cs" />
-    <Compile Include="C:\Users\Administrator\Desktop\btnOpacity.cs">
-      <Link>btnOpacity.cs</Link>
-    </Compile>
-    <Compile Include="Delay.cs" />
+    <Compile Include="Classes\Animations.cs" />
+    <None Include="Unused\AudioInfo.cs" />
     <Compile Include="fButton.xaml.cs">
       <DependentUpon>fButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MusicPlayer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="MySongList.xaml.cs">
+    <Compile Include="Pages\MySongList.xaml.cs">
       <DependentUpon>MySongList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page1.xaml.cs">
+    <Compile Include="Pages\Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="sliMove.cs" />
-    <Compile Include="XmlStruct.cs" />
+    <Compile Include="Classes\XmlStruct.cs" />
     <Page Include="fButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,17 +99,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Blur.cs" />
-    <Compile Include="Formats.cs" />
+    <Compile Include="Classes\Blur.cs" />
+    <None Include="Unused\Formats.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MySongList.xaml">
+    <Page Include="Pages\MySongList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page1.xaml">
+    <Page Include="Pages\Page1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
