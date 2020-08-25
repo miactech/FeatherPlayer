@@ -36,7 +36,7 @@ namespace FeatherPlayer
             continuedata = Geometry.Parse(continuedatastr);
             pausedata = Geometry.Parse(pausestr);
 
-            player = new MusicPlayer();
+            player = new MusicPlayer(MusicPlayer.GetDefaultWasapiOutDevice());
             player.PlaybackStopped += Player_PlaybackStopped;
 
             timer = new DispatcherTimer();
@@ -189,7 +189,7 @@ namespace FeatherPlayer
                         }                  
                         fileName = opFile.FileName;
                         //打开文件
-                        player.Open(fileName, player.GetDefaultWasapiOutDevice());
+                        player.Open(fileName);
 
                         lblSongInformation.Content = string.Format("{0}kHz / {1}Bit", player.SampleRate / 1000, player.BitDepth);
                         sliSong.Maximum = player.Length.TotalMilliseconds;

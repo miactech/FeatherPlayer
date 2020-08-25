@@ -9,11 +9,15 @@ namespace FeatherPlayer
 {
     public class MusicPlayer : Component
     {
+        private MMDevice _device;
         private ISoundOut _soundOut;
         private IWaveSource _waveSource;
 
         private int _volume = 100;
-
+        public MusicPlayer(MMDevice device)
+        {
+            _device = device;
+        }
         /// <summary>
         /// 播放停止事件
         /// </summary>
@@ -105,13 +109,13 @@ namespace FeatherPlayer
         /// </summary>
         /// <param name="filename">音频文件名</param>
         /// <param name="device">要使用的音频设备</param>
-        public void Open(string filename, MMDevice device)
+        public void Open(string filename)
         {
             CleanupPlayback();
 
             _waveSource = CodecFactory.Instance.GetCodec(filename);
 
-            _soundOut = new WasapiOut() { Latency = 100, Device = device };
+            _soundOut = new WasapiOut() { Latency = 100, Device = _device };
             _soundOut.Initialize(_waveSource);
 
             _soundOut.Volume = Math.Min(1.0f, Math.Max(_volume / 100f, 0f)); ;
@@ -121,7 +125,7 @@ namespace FeatherPlayer
         /// 获取默认音频输出设备。
         /// </summary>
         /// <returns>默认音频输出设备</returns>
-        public MMDevice GetDefaultWasapiOutDevice()
+        public static MMDevice GetDefaultWasapiOutDevice()
         {
             var mmdeviceEnumerator = new MMDeviceEnumerator();
             return mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
