@@ -24,7 +24,9 @@ namespace FeatherPlayer
     public partial class MainWindow : Window
     {
         Geometry pausedata, continuedata;//initialize the icons
-        bool isSliderChanging = false;
+        bool isSliderChanging = true;
+        bool isPositionChanging = true;
+        bool isVoice = false;
         MusicPlayer player;
         public MainWindow()
         {
@@ -141,6 +143,8 @@ namespace FeatherPlayer
         DispatcherTimer timer = null;
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            isVoice = false;
+            isSliderChanging = true;
             //sliSong.IsEnabled = true;
             string fileName;          
             //int stream;
@@ -184,10 +188,20 @@ namespace FeatherPlayer
 
                         sliSong.Maximum = player.Length.TotalMilliseconds;
                         player.Play();
-                        player.Volume = 10;
+                        player.Volume = 50;
                         PlayStop.Data = pausedata;
                         //改变播放进度
-                        
+
+
+                        timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
+                            if (isSliderChanging) { sliSong.Value = player.Position.TotalMilliseconds; }
+                            if (isPositionChanging) { lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length); }
+                            if (isVoice) { player.Volume = (int)sliVoice.Value; lblVoice.Content = player.Volume; }
+                        });
+
+                        player.PlaybackStopped += new EventHandler<PlaybackStoppedEventArgs>((object s2,PlaybackStoppedEventArgs pse) => {
+                            timer.Stop();
+                        });
                         timer.Start();
                     }
                     break;
@@ -263,17 +277,49 @@ namespace FeatherPlayer
 
         private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            sliMove.FloatSlider(sliSong,0, 700);
+            sliMove.FloatSlider(sliSong, 700);
             player.Stop();
             timer.Stop();
         }
 
         private void Next_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            sliMove.FloatSlider(sliSong,0, 700);
+            sliMove.FloatSlider(sliSong, 700);
             player.Stop();
             timer.Stop();
         }
+
+        private void sliSong_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //右键切换为音量条效果
+            sliVoice.Value = player.Volume; //同步音量
+            isSliderChanging = false;
+            sliMove.FloatSlider(sliSong, 0, 200);
+            Delay.DelayTime(200);
+            sliVoice.Visibility = Visibility.Visible;
+            sliVoice.Value = 0;
+            lblVoice.Content = player.Volume;
+            lblPosition.Visibility = Visibility.Hidden;
+            lblVoice.Visibility = Visibility.Visible;
+            sliMove.FloatSlider(sliVoice, player.Volume, 200);
+            sliSong.Visibility = Visibility.Hidden;
+            timer.Interval = TimeSpan.FromMilliseconds(50); //加快timer时间
+            isVoice = true;         
+        }
+
+        private void sliVoice_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //如果切换为进度条
+            sliVoice.Visibility = Visibility.Hidden;
+            lblVoice.Visibility = Visibility.Hidden;
+            sliMove.FloatSlider(sliSong, player.Position.TotalMilliseconds, 200);
+            sliSong.Visibility = Visibility.Visible;
+            lblPosition.Visibility = Visibility.Visible;
+            timer.Interval = TimeSpan.FromMilliseconds(1000); //调回正常timer时间
+            lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
+            isVoice = false;
+        }
+
         /// <summary>
         /// 播放已停止
         /// </summary>
