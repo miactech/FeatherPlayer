@@ -7,90 +7,116 @@ using CSCore.SoundOut;
 
 namespace FeatherPlayer
 {
-        public class MusicPlayer : Component
-        {
-            private ISoundOut _soundOut;
-            private IWaveSource _waveSource;
+    public class MusicPlayer : Component
+    {
+        private ISoundOut _soundOut;
+        private IWaveSource _waveSource;
+
+        private int _volume = 100;
+
         /// <summary>
         /// 播放停止事件
         /// </summary>
-            public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
+        public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
         /// <summary>
         /// 当前播放状态。
         /// </summary>
-            public PlaybackState PlaybackState
+        public PlaybackState PlaybackState
+        {
+            get
             {
-                get
-                {
-                    if (_soundOut != null)
-                        return _soundOut.PlaybackState;
-                    return PlaybackState.Stopped;
-                }
+                if (_soundOut != null)
+                    return _soundOut.PlaybackState;
+                return PlaybackState.Stopped;
             }
+        }
         /// <summary>
         /// 获取当前播放位置。
         /// </summary>
-            public TimeSpan Position
+        public TimeSpan Position
+        {
+            get
             {
-                get
-                {
-                    if (_waveSource != null)
-                        return _waveSource.GetPosition();
-                    return TimeSpan.Zero;
-                }
-                set
-                {
-                    if (_waveSource != null)
-                        _waveSource.SetPosition(value);
-                }
+                if (_waveSource != null)
+                    return _waveSource.GetPosition();
+                return TimeSpan.Zero;
             }
+            set
+            {
+                if (_waveSource != null)
+                    _waveSource.SetPosition(value);
+            }
+        }
         /// <summary>
         /// 获取歌曲总长度。
         /// </summary>
-            public TimeSpan Length
+        public TimeSpan Length
+        {
+            get
             {
-                get
-                {
-                    if (_waveSource != null)
-                        return _waveSource.GetLength();
-                    return TimeSpan.Zero;
-                }
+                if (_waveSource != null)
+                    return _waveSource.GetLength();
+                return TimeSpan.Zero;
             }
+        }
         /// <summary>
         /// 设置音量。 (0~100)
         /// </summary>
-            public int Volume
+        public int Volume
+        {
+
+            get
             {
-            
-                get
+                if (_soundOut != null)
+                    return Math.Min(100, Math.Max((int)(_soundOut.Volume * 100), 0));
+                else { return _volume; }
+            }
+            set
+            {
+                if (_soundOut != null)
                 {
-                    if (_soundOut != null)
-                        return Math.Min(100, Math.Max((int)(_soundOut.Volume * 100), 0));
-                    return 100;
+                    _volume = value;
+                    _soundOut.Volume = Math.Min(1.0f, Math.Max(_volume / 100f, 0f));
                 }
-                set
+                else
                 {
-                    if (_soundOut != null)
-                    {
-                        _soundOut.Volume = Math.Min(1.0f, Math.Max(value / 100f, 0f));
-                    }
+                    _volume = value;
                 }
             }
+        }
+        /// <summary>
+        /// 获取音频采样率(Hz)
+        /// </summary>
+        public int SampleRate
+        {
+            get { if (_waveSource != null) return _waveSource.WaveFormat.SampleRate; else return 0; }
+        }
+        /// <summary>
+        /// 获取音频采样深度
+        /// </summary>
+        public int BitDepth
+        {
+            get { if (_waveSource != null) return _waveSource.WaveFormat.BitsPerSample; else return 0; }
+        }
+
+
         /// <summary>
         /// 打开一个音频文件。
         /// </summary>
         /// <param name="filename">音频文件名</param>
         /// <param name="device">要使用的音频设备</param>
-            public void Open(string filename, MMDevice device)
-            {
-                CleanupPlayback();
+        public void Open(string filename, MMDevice device)
+        {
+            CleanupPlayback();
 
-                _waveSource =
-                    CodecFactory.Instance.GetCodec(filename);
-                _soundOut = new WasapiOut() { Latency = 100, Device = device };
-                _soundOut.Initialize(_waveSource);
-                if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
-            }
+            _waveSource = CodecFactory.Instance.GetCodec(filename);
+
+            _soundOut = new WasapiOut() { Latency = 100, Device = device };
+            _soundOut.Initialize(_waveSource);
+
+            _soundOut.Volume = Math.Min(1.0f, Math.Max(_volume / 100f, 0f)); ;
+            if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
+        }
         /// <summary>
         /// 获取默认音频输出设备。
         /// </summary>
@@ -105,48 +131,48 @@ namespace FeatherPlayer
         /// <summary>
         /// 播放。
         /// </summary>
-            public void Play()
-            {
-                if (_soundOut != null)
-                    _soundOut.Play();
-            }
+        public void Play()
+        {
+            if (_soundOut != null)
+                _soundOut.Play();
+        }
         /// <summary>
         /// 暂停。
         /// </summary>
-            public void Pause()
-            {
-                if (_soundOut != null)
-                    _soundOut.Pause();
-            }
+        public void Pause()
+        {
+            if (_soundOut != null)
+                _soundOut.Pause();
+        }
         /// <summary>
         /// 停止播放。
         /// </summary>
-            public void Stop()
-            {
-                if (_soundOut != null)
-                    _soundOut.Stop();
-            }
+        public void Stop()
+        {
+            if (_soundOut != null)
+                _soundOut.Stop();
+        }
 
-            private void CleanupPlayback()
+        private void CleanupPlayback()
+        {
+            if (_soundOut != null)
             {
-                if (_soundOut != null)
-                {
-                    _soundOut.Dispose();
-                    _soundOut = null;
-                }
-                if (_waveSource != null)
-                {
-                    _waveSource.Dispose();
-                    _waveSource = null;
-                }
+                _soundOut.Dispose();
+                _soundOut = null;
             }
-
-            protected override void Dispose(bool disposing)
+            if (_waveSource != null)
             {
-                base.Dispose(disposing);
-                CleanupPlayback();
+                _waveSource.Dispose();
+                _waveSource = null;
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            CleanupPlayback();
+        }
     }
+}
 
 

@@ -43,8 +43,6 @@ namespace FeatherPlayer
     }
     class Blur
     {
-
-
         [DllImport("user32.dll")]
         internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
         internal static void EnableBlur(Window wnd)

@@ -271,7 +271,7 @@
     </Window.Resources>
     <Grid>
         <Grid x:Name="grdMain" HorizontalAlignment="Left"  Width="1089" Height="580" Margin="200,40,0,0" VerticalAlignment="Top" >
-            <Frame x:Name="frmPages" Source="/FeatherPlayer;component/MySongList.xaml" NavigationUIVisibility="Hidden" Background="#FF0F5789" MouseDown="frmPages_MouseDown"/>
+            <Frame x:Name="frmPages" Source="/FeatherPlayer;component/Pages/MySongList.xaml" NavigationUIVisibility="Hidden" Background="#FF0F5789" MouseDown="frmPages_MouseDown"/>
             <Rectangle Fill="#FF0F5789" HorizontalAlignment="Left" Height="700" Margin="-200,-40,0,-80" VerticalAlignment="Top" Width="200" Opacity="0.6"/>
 
 
@@ -291,8 +291,8 @@
 
             <TextBlock x:Name="tbArtist" Text="Artist" HorizontalAlignment="Left" Margin="89,42,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B" Width="109" Height="17" TextTrimming="CharacterEllipsis" />
             <TextBlock x:Name="tbTitle" HorizontalAlignment="Left" Margin="89,18,0,0" Width="109" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Height="19" Foreground="White" FontSize="14" TextTrimming="CharacterEllipsis"/>
-            <Label x:Name="lblVoice" Content="0" HorizontalAlignment="Left" Margin="413,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Visibility="Hidden"/>
-            <Slider x:Name="sliVoice" HorizontalAlignment="Left" Margin="413,45,0,0" VerticalAlignment="Top" Width="652" Style="{DynamicResource FeatherSlider}" Maximum="100" Visibility="Hidden" MouseRightButtonUp="sliVoice_MouseRightButtonUp"/>
+            <Label x:Name="lblVolume" Content="0" HorizontalAlignment="Left" Margin="413,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Visibility="Hidden"/>
+            <Slider x:Name="sliVolume" HorizontalAlignment="Left" Margin="413,45,0,0" VerticalAlignment="Top" Width="652" Style="{DynamicResource FeatherSlider}" Maximum="100" Visibility="Hidden" MouseRightButtonUp="sliVolume_MouseRightButtonUp" ValueChanged="sliVolume_ValueChanged"/>
         </Grid>
         <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="200,0,0,0" MouseLeftButtonDown="gridTitle_MouseLeftButtonDown" Background="#FF0F5789">
             <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown">
