@@ -25,9 +25,7 @@ namespace FeatherPlayer
     public partial class MainWindow : Window
     {
         Geometry pausedata, continuedata;//initialize the icons
-        bool isSliderChanging = false;
-        bool isPositionChanging = false;
-        bool isVolumeChanging = false;
+        bool isSliderChanging = true; //滑条是否能改变，默认为true
         MusicPlayer player;
         public MainWindow()
         {
@@ -44,14 +42,12 @@ namespace FeatherPlayer
 
             timer.Tick += new EventHandler((object s1, EventArgs e1) =>
             {
-                if (!isSliderChanging)
-                { sliSong.Value = player.Position.TotalMilliseconds;
+            if (isSliderChanging)
+                {
+                    sliSong.Value = player.Position.TotalMilliseconds;
                     lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length); }
-                /*
-                if (isPositionChanging)
-                { lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", sliSong.Value, player.Length); }*/
-
-            });
+                }
+            );
 
             InitializeComponent();
             //playGrid.Visibility = Visibility.Hidden;
@@ -198,13 +194,6 @@ namespace FeatherPlayer
                         PlayStop.Data = pausedata;
                         //改变播放进度
 
-                        /*
-                        timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
-                            if (isSliderChanging) { sliSong.Value = player.Position.TotalMilliseconds; }
-                             }
-                            //if (isVoice) { player.Volume = (int)sliVolume.Value; lblVolume.Content = player.Volume; }
-                        });*/
-
                         player.PlaybackStopped += new EventHandler<PlaybackStoppedEventArgs>((object s2,PlaybackStoppedEventArgs pse) => {
                             timer.Stop();
                         });
@@ -258,25 +247,22 @@ namespace FeatherPlayer
 
         private void sliSong_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            isSliderChanging = true; //isSliChanged为是否能改变滑条的判断bool
+            isSliderChanging = false;
         }
 
         private void sliSong_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //手动调整位置
             isSliderChanging = false;
             TimeSpan tsNewValue = TimeSpan.FromMilliseconds(sliSong.Value);
-            //double perc = sliSong.Value / sliSong.Maximum;
-            //TimeSpan position = TimeSpan.FromMilliseconds(player.Length.TotalMilliseconds * perc);
             player.Position = tsNewValue; //更改位置
             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
+            isSliderChanging = true;
         }
 
         private void sliSong_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) 
         {
-            if (isSliderChanging)
-            {
-                lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", TimeSpan.FromMilliseconds(sliSong.Value), player.Length);
-            }
+
         }
 
         private void sliSong_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -303,41 +289,37 @@ namespace FeatherPlayer
         private void sliSong_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             //右键切换为音量条效果
-            //sliVolume.Value = player.Volume; //同步音量
-            isSliderChanging = false;
-            CustomAnimations.FloatSlider(sliSong, 0, 200);
-            //Delay.DelayTime(200);
-            sliVolume.Visibility = Visibility.Visible;
-            sliVolume.Value = 0;
+            //isSliderChanging = true;
+            CustomAnimations.FloatSlider(sliSong, 0, 400);
+            sliVolume.Opacity = 1;
             lblVolume.Content = player.Volume;
-            lblPosition.Visibility = Visibility.Hidden;
-            lblVolume.Visibility = Visibility.Visible;
-            CustomAnimations.FloatSlider(sliVolume, player.Volume, 200);
-            sliSong.Visibility = Visibility.Hidden;
-            //timer.Interval = TimeSpan.FromMilliseconds(50); //加快timer时间
-            isVolumeChanging = true;         
+            lblPosition.Opacity = 0;
+            lblVolume.Opacity = 1;
+            CustomAnimations.FloatSlider(sliVolume, player.Volume, 400);
+            sliSong.Opacity = 0;  
         }
 
         private void sliVolume_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             //如果切换为进度条
-            sliVolume.Visibility = Visibility.Hidden;
-            lblVolume.Visibility = Visibility.Hidden;
-            sliSong.Visibility = Visibility.Visible;
-            CustomAnimations.FloatSlider(sliSong, player.Position.TotalMilliseconds, 200);
-            
-            lblPosition.Visibility = Visibility.Visible;
-
-            //timer.Interval = TimeSpan.FromMilliseconds(1000); //调回正常timer时间
-            lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
-            //
-            isVolumeChanging = false;
+            sliVolume.Opacity = 0;
+            lblVolume.Opacity = 0;
+            sliSong.Opacity = 1;
+            CustomAnimations.FloatSlider(sliSong, player.Position.TotalMilliseconds, 400);
+            //sliSong.Value = player.Position.TotalMilliseconds;
+            lblPosition.Opacity = 1;
+            lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length); //同步位置
         }
 
         private void sliVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             player.Volume = Convert.ToInt32(sliVolume.Value);
             lblVolume.Content = Convert.ToInt32(sliVolume.Value);
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("当前参数.\n\r当前isSliderChanging状态：" + isSliderChanging + "\n\r\n\r当前player音量：" + player.Volume.ToString() + ".\n\r当前player位置：" + player.Position.TotalMilliseconds.ToString() + "\n\r\n\r当前sliSong的Value：" + sliSong.Value.ToString() + "\n\r当前timer刻度：" + timer.Interval.TotalMilliseconds.ToString(), "调试信息");
         }
 
         /// <summary>
