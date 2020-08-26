@@ -24,10 +24,12 @@ namespace FeatherPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        Geometry pausedata, continuedata,shuffledata,repeatalldata,repeat1data;//initialize the icons
+        private Geometry pausedata;
+        private Geometry continuedata;
+        private readonly Geometry shuffledata;
+        private Geometry repeatalldata;
+        private Geometry repeat1data;
         bool isSliderChanging = false;
-        bool isPositionChanging = false;
-        bool isVolumeChanging = false;
         MusicPlayer player;
         public MainWindow()
         {
@@ -54,8 +56,6 @@ namespace FeatherPlayer
             });
 
             InitializeComponent();
-            //playGrid.Visibility = Visibility.Hidden;
-            //hhellonice i see you ok wait i will have dinner ok.
         }
 
         public enum playStatus
@@ -98,8 +98,8 @@ namespace FeatherPlayer
             btnExitBackground.Background = System.Windows.Media.Brushes.OrangeRed;
             player.Stop();
             Application.Current.Shutdown();
-        }      
-
+        }
+        #region
         private void PlayStop_MouseEnter(object sender, MouseEventArgs e)
         {
             CustomAnimations.OpacityAnimation(btnPlayStop, 0.9, 200);
@@ -147,6 +147,7 @@ namespace FeatherPlayer
             CustomAnimations.OpacityAnimation(gridCover, 1, 200);
             CustomAnimations.ScaleEasingAnimationShow(gridCover, 0.9, 1, 500);
         }
+        #endregion
         DispatcherTimer timer = null;
         private void PlayStop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -197,13 +198,6 @@ namespace FeatherPlayer
                         player.Volume = 50;
                         PlayStop.Data = pausedata;
                         //改变播放进度
-
-                        /*
-                        timer.Tick += new EventHandler((object s1 ,EventArgs e1) => {
-                            if (isSliderChanging) { sliSong.Value = player.Position.TotalMilliseconds; }
-                             }
-                            //if (isVoice) { player.Volume = (int)sliVolume.Value; lblVolume.Content = player.Volume; }
-                        });*/
 
                         player.PlaybackStopped += new EventHandler<PlaybackStoppedEventArgs>((object s2,PlaybackStoppedEventArgs pse) => {
                             timer.Stop();
@@ -265,8 +259,6 @@ namespace FeatherPlayer
         {
             isSliderChanging = false;
             TimeSpan tsNewValue = TimeSpan.FromMilliseconds(sliSong.Value);
-            //double perc = sliSong.Value / sliSong.Maximum;
-            //TimeSpan position = TimeSpan.FromMilliseconds(player.Length.TotalMilliseconds * perc);
             player.Position = tsNewValue; //更改位置
             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
         }
@@ -286,7 +278,6 @@ namespace FeatherPlayer
 
         private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
             player.Stop();
             timer.Stop();
             CustomAnimations.FloatSlider(sliSong, 0, 200);
@@ -295,43 +286,38 @@ namespace FeatherPlayer
         private void Next_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             sliSong.Value = 0;
-            //CustomAnimations.FloatSlider(sliSong,0, 700);
             player.Stop();
             timer.Stop();
         }
-
+        int playervolume;
         private void sliSong_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             //右键切换为音量条效果
-            //sliVolume.Value = player.Volume; //同步音量
             isSliderChanging = false;
-            CustomAnimations.FloatSlider(sliSong, 0, 200);
-            //Delay.DelayTime(200);
+            //CustomAnimations.FloatSlider(sliSong, 0, 200); 问题代码，加了会导致slider卡住
             sliVolume.Visibility = Visibility.Visible;
             sliVolume.Value = 0;
             lblVolume.Content = player.Volume;
             lblPosition.Visibility = Visibility.Hidden;
             lblVolume.Visibility = Visibility.Visible;
-            CustomAnimations.FloatSlider(sliVolume, player.Volume, 200);
+            player.Volume = playervolume;
+            CustomAnimations.FloatSlider(sliVolume, 0, player.Volume, 500);
             sliSong.Visibility = Visibility.Hidden;
-            //timer.Interval = TimeSpan.FromMilliseconds(50); //加快timer时间
-            isVolumeChanging = true;         
+            //timer.Interval = TimeSpan.FromMilliseconds(50); //加快timer时间       
         }
 
         private void sliVolume_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             //如果切换为进度条
+            playervolume = player.Volume + 2;
             sliVolume.Visibility = Visibility.Hidden;
             lblVolume.Visibility = Visibility.Hidden;
             sliSong.Visibility = Visibility.Visible;
-            CustomAnimations.FloatSlider(sliSong, player.Position.TotalMilliseconds, 200);
-            
+            //CustomAnimations.FloatSlider(sliSong, player.Position.TotalMilliseconds, 200); 问题代码，加了会导致slider卡住         
             lblPosition.Visibility = Visibility.Visible;
-
             //timer.Interval = TimeSpan.FromMilliseconds(1000); //调回正常timer时间
             lblPosition.Content = string.Format("{0:mm\\:ss} / {1:mm\\:ss}", player.Position, player.Length);
-            //
-            isVolumeChanging = false;
+            player.Volume = Convert.ToInt32(sliVolume.Value);
         }
 
         private void sliVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
