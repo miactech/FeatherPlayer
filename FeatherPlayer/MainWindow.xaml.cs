@@ -24,7 +24,7 @@ namespace FeatherPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        Geometry pausedata, continuedata;//initialize the icons
+        Geometry pausedata, continuedata,shuffledata,repeatalldata,repeat1data;//initialize the icons
         bool isSliderChanging = false;
         bool isPositionChanging = false;
         bool isVolumeChanging = false;

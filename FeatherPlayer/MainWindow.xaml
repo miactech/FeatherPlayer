@@ -293,6 +293,11 @@
             <TextBlock x:Name="tbTitle" HorizontalAlignment="Left" Margin="89,18,0,0" Width="109" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Height="19" Foreground="White" FontSize="14" TextTrimming="CharacterEllipsis"/>
             <Label x:Name="lblVolume" Content="0" HorizontalAlignment="Left" Margin="413,14,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Visibility="Hidden"/>
             <Slider x:Name="sliVolume" HorizontalAlignment="Left" Margin="413,45,0,0" VerticalAlignment="Top" Width="602" Style="{DynamicResource FeatherSlider}" Maximum="100" Visibility="Hidden" MouseRightButtonUp="sliVolume_MouseRightButtonUp" ValueChanged="sliVolume_ValueChanged"/>
+       <Viewbox Width="48" Height="48" Margin="1031,17,10,14">
+    <Canvas Width="24" Height="24">
+        <Path Fill="White" Data="M14.83,13.41L13.42,14.82L16.55,17.95L14.5,20H20V14.5L17.96,16.54L14.83,13.41M14.5,4L16.54,6.04L4,18.59L5.41,20L17.96,7.46L20,9.5V4M10.59,9.17L5.41,4L4,5.41L9.17,10.58L10.59,9.17Z" />
+    </Canvas>
+</Viewbox>
         </Grid>
         <Grid x:Name="gridTitle" Height="40" VerticalAlignment="Top" Margin="200,0,0,0" MouseLeftButtonDown="gridTitle_MouseLeftButtonDown" Background="#FF0F5789">
             <Grid x:Name="btnExit" Width="33" Margin="0,0,1,0" d:LayoutOverrides="TopMargin, BottomMargin" HorizontalAlignment="Right" MouseEnter="btnExit_MouseEnter" MouseLeave="btnExit_MouseLeave" PreviewMouseLeftButtonDown="btnExit_PreviewMouseLeftButtonDown">
