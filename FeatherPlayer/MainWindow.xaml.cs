@@ -271,11 +271,6 @@ namespace FeatherPlayer
             }
         }
 
-        private void sliSong_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
         private void Back_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             player.Stop();
@@ -289,7 +284,7 @@ namespace FeatherPlayer
             player.Stop();
             timer.Stop();
         }
-        int playervolume;
+        int playervolume = 60;
         private void sliSong_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             //右键切换为音量条效果
