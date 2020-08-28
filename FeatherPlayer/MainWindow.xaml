@@ -272,7 +272,7 @@
     <Grid>
         <Grid x:Name="grdMain" HorizontalAlignment="Left"  Width="1089" Height="580" Margin="200,40,0,0" VerticalAlignment="Top" >
             <Frame x:Name="frmPages" Source="/FeatherPlayer;component/Pages/MySongList.xaml" NavigationUIVisibility="Hidden" Background="#FF0F5789" MouseDown="frmPages_MouseDown"/>
-            <Rectangle Fill="#FF0F5789" HorizontalAlignment="Left" Height="700" Margin="-200,-40,0,-80" VerticalAlignment="Top" Width="200" Opacity="0.6"/>
+            <Rectangle Fill="#FF020E17" HorizontalAlignment="Left" Height="700" Margin="-200,-40,0,-80" VerticalAlignment="Top" Width="200" Opacity="0.4"/>
 
 
         </Grid>

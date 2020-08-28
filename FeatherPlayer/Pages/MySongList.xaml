@@ -9,17 +9,18 @@
       Title="MySongList" Margin="0,0,34,0">
 
     <Grid Margin="0,0,-31,0">
-        <Label x:Name="lblMySongList" Content="我的歌单" HorizontalAlignment="Left" Margin="69,13,0,0" VerticalAlignment="Top" Foreground="White" FontSize="26"/>
-        <Label x:Name="lblMySongListPath" Content="X:\XXX\XXXX" HorizontalAlignment="Left" Margin="188,25,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B" FontSize="14"/>
+        <Label x:Name="lblMySongList" Content="My Favourite" HorizontalAlignment="Left" Margin="60,31,0,0" VerticalAlignment="Top" Foreground="White" FontSize="30" FontWeight="SemiBold"/>
+        <Label x:Name="lblMySongListPath" Content="X:\XXX\XXXX" HorizontalAlignment="Left" Margin="60,6,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B"/>
 
-        <local:fButton x:Name="SongList1" HorizontalAlignment="Left" Height="195" Margin="70,80,0,0" VerticalAlignment="Top" Width="195"/>
-        <local:fButton x:Name="SongList2" Margin="320,80,0,0" HorizontalAlignment="Left" Width="195" Height="195" VerticalAlignment="Top"/>
-        <local:fButton x:Name="SongList3" Height="195" Margin="560,80,333,0" VerticalAlignment="Top"/>
-        <local:fButton x:Name="SongList4" Height="195" Margin="800,80,93,0" VerticalAlignment="Top" />
-        <local:fButton x:Name="SongList5" Height="195" Margin="70,330,823,0" VerticalAlignment="Top"/>
-        <local:fButton x:Name="SongList6" Height="195" Margin="320,330,573,0" VerticalAlignment="Top"/>
-        <local:fButton x:Name="SongList7" Height="195" Margin="560,330,333,0" VerticalAlignment="Top" Width="195"/>
-        <local:fButton x:Name="SongList8" Height="195" Margin="800,330,93,0" VerticalAlignment="Top" Width="195"/>
+        <local:fButton x:Name="SongList1" HorizontalAlignment="Left" Height="176" Margin="76,105,0,0" VerticalAlignment="Top" Width="549"/>
+        <local:fButton x:Name="SongList2" Margin="670,105,76,0" Height="176" VerticalAlignment="Top"/>
+        <local:fButton x:Name="SongList3" Height="120" Margin="76,395,889,0" VerticalAlignment="Top" Width="120"/>
+        <local:fButton x:Name="SongList4" Height="120" Margin="238,395,727,0" VerticalAlignment="Top" Width="120" />
+        <local:fButton x:Name="SongList5" Height="120" Margin="396,395,569,0" VerticalAlignment="Top" Width="120"/>
+        <local:fButton x:Name="SongList6" Height="120" Margin="560,395,405,0" VerticalAlignment="Top" Width="120"/>
+        <local:fButton x:Name="SongList7" Height="120" Margin="725,395,240,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label" Content="Another Songs" HorizontalAlignment="Left" Margin="60,325,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontSize="30" FontWeight="Bold"/>
+        <local:fButton x:Name="SongList8" Height="120" Margin="889,395,76,0" VerticalAlignment="Top" Width="120"/>
         <Grid.Effect>
             <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="Black" Opacity="0.8"/>
         </Grid.Effect>

@@ -18,28 +18,22 @@ namespace FeatherPlayer
         /// <param name="time">持续时间(ms)</param>
         public static void FloatSlider(Slider sliname, double to, int time)
         {
-            EasingFunctionBase easeFunction = new PowerEase()
+            lock (sliname)
             {
-                EasingMode = EasingMode.EaseOut,
-                Power = 5
-            };
-            DoubleAnimation slianimation = new DoubleAnimation()
-            {
-                To = to,
-                EasingFunction = easeFunction,             //缓动函数
-                Duration = TimeSpan.FromMilliseconds(time)  //动画播放时间
-            };
-            /*
-            EventHandler handler = null;
-            slianimation.Completed += handler = (s, e) =>
-            {
-                sliname.Value = to;
-                //slianimation.Completed -= handler;
-                //slianimation = null;
-            };*/
-            sliname.BeginAnimation(Slider.ValueProperty, slianimation);
+                EasingFunctionBase easeFunction = new PowerEase()
+                {
+                    EasingMode = EasingMode.EaseOut,
+                    Power = 5
+                };
+                DoubleAnimation slianimation = new DoubleAnimation()
+                {
+                    To = to,
+                    EasingFunction = easeFunction,             //缓动函数
+                    Duration = TimeSpan.FromMilliseconds(time)  //动画播放时间
+                };
+                sliname.BeginAnimation(Slider.ValueProperty, slianimation);
 
-
+            }
         }
 
         /// <summary>
@@ -51,27 +45,29 @@ namespace FeatherPlayer
         /// <param name="time">持续时间(ms)</param>
         public static void FloatSlider(Slider sliname, double from, double to, int time)
         {
-            EasingFunctionBase easeFunction = new PowerEase()
+            lock (sliname)
             {
-                EasingMode = EasingMode.EaseOut,
-                Power = 5
-            };
-            DoubleAnimation slianimation = new DoubleAnimation()
-            {
-                From = from,
-                To = to,
-                EasingFunction = easeFunction,             //缓动函数
-                Duration = TimeSpan.FromMilliseconds(time)  //动画播放时间
-            };
-            EventHandler handler = null;
-            slianimation.Completed += handler = (s, e) =>
-            {
-                sliname.Value = to;
-                slianimation.Completed -= handler;
-                slianimation = null;
-            };
-            sliname.BeginAnimation(Slider.ValueProperty, slianimation);
-            
+                EasingFunctionBase easeFunction = new PowerEase()
+                {
+                    EasingMode = EasingMode.EaseOut,
+                    Power = 5
+                };
+                DoubleAnimation slianimation = new DoubleAnimation()
+                {
+                    From = from,
+                    To = to,
+                    EasingFunction = easeFunction,             //缓动函数
+                    Duration = TimeSpan.FromMilliseconds(time)  //动画播放时间
+                };
+                EventHandler handler = null;
+                slianimation.Completed += handler = (s, e) =>
+                {
+                    sliname.Value = to;
+                    slianimation.Completed -= handler;
+                    slianimation = null;
+                };
+                sliname.BeginAnimation(Slider.ValueProperty, slianimation);
+            }
         }
 
         /// <summary>
